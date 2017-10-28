@@ -1,27 +1,27 @@
 ## Setup
-install php packages
+1.install php packages
 ```
 composer install
 ```
 
-install javascript packages
+2.install javascript packages
 ```
 npm install
 ```
 
-create ```.env``` file, simply duplicate content from ```.env.example``` and modify it
+3.create ```.env``` file, simply duplicate content from ```.env.example``` and modify it
 
-build up database
+4.build up database
 ```
 php artisan migrate
 ```
 
-insert necessary data into database
+5.insert necessary data into database
 ```
 php artisan db:seed
 ```
 
-generate laravel application key
+6.generate laravel application key
 ```
 php artisan key:generate
 ```
