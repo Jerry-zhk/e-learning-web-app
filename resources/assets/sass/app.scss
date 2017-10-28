@@ -1,0 +1,42 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+@import "~bulma/bulma";
+
+@import "~font-awesome/scss/font-awesome";
+
+
+.header-wrapper{
+	position: relative;
+	margin-bottom: 1em;
+
+	#app-dropdown-menu{
+		background-color: white;
+		width: 100%;
+		position: absolute;
+		top: 102%;
+		left: 0;
+		z-index: 10;
+		overflow: hidden;
+		-webkit-transition: all 0.2s ease-in-out;
+				transition: all 0.2s ease-in-out;
+
+		&.is-open{
+			-webkit-transition: all 0.2s ease-in-out;
+					transition: all 0.2s ease-in-out;
+		}
+	}
+}
+
+.footer-wrapper{
+	position: relative;
+	margin-top: 1em;
+}
