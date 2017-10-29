@@ -16,7 +16,6 @@
 <body>
     <div class="header-wrapper">
         <div class="container">
-            @if (Route::has('login'))
             <nav class="navbar" role="navigation">  
                 <div class="navbar-brand">
                     <a class="navbar-item" href="{{ route('home')}}">
@@ -28,6 +27,7 @@
                         <a id="app-dropdown-menu-toggle" class="navbar-link" href="javascript:void(0);">Courses</a>
                         <a class="navbar-item">Store</a>                    
                     </div>
+                    @if (Route::has('login'))
                     <div class="navbar-end">
                         @auth
                         <div class="navbar-item has-dropdown is-hoverable">
@@ -35,7 +35,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item" href="">My account</a>
                                 <a class="navbar-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}
                                 </form>
@@ -50,10 +50,10 @@
                         </div>
                         @endif
                     </div>
+                    @endif
                 </div>
                 
             </nav>
-            @endif
         </div>
         <div id="app-dropdown-menu" class="box is-hidden" tabindex="-1">
             <div class="container">

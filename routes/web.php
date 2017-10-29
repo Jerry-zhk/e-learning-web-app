@@ -14,3 +14,9 @@
 Auth::routes();
 
 Route::view('/', 'home')->name('home');
+
+Route::prefix('admin')->middleware('role:admin')->group(function(){
+	Route::get('/', function(){
+		return view('admin.home');
+	})->name('admin.home');
+});
