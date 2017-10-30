@@ -11,17 +11,22 @@ npm install
 
 3. create ```.env``` file, simply duplicate content from ```.env.example``` and modify it
 
-4. build up database
+4. composer dump autoload map
+```
+composer dump-autoload
+```
+
+5. build up database
 ```
 php artisan migrate
 ```
 
-5. insert necessary data into database
+6. insert necessary data into database
 ```
 php artisan db:seed
 ```
 
-6. generate laravel application key
+7. generate laravel application key
 ```
 php artisan key:generate
 ```

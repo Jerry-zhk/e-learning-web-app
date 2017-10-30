@@ -3,8 +3,7 @@
 @section('content')
 <nav class="breadcrumb" aria-label="breadcrumbs">
 	<ul>
-		<li class="is-active"><a href="#"  aria-current="page">Admin</a></li>
-		<li><a href="#">Home</a></li>
+		<li class="is-active"><a href="#">Dashboard</a></li>
 	</ul>
 </nav>
 <div class="columns">

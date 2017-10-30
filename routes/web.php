@@ -15,8 +15,7 @@ Auth::routes();
 
 Route::view('/', 'home')->name('home');
 
-Route::prefix('admin')->middleware('role:admin')->group(function(){
-	Route::get('/', function(){
-		return view('admin.home');
-	})->name('admin.home');
+Route::prefix('admin')->middleware('role:superadmin|admin')->group(function(){
+	Route::get('/', 'AdminController@index')->name('admin.home');
+	Route::get('member', 'AdminController@member')->name('admin.member');
 });
