@@ -28,4 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scopeMatchKeyword($query, $keyword){
+        return $query->where('name', 'like', "%$keyword%")
+            ->orWhere('username', 'like', "%$keyword%")
+            ->orWhere('email', 'like', "%$keyword%");
+    }
 }

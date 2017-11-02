@@ -1,13 +1,5 @@
 @if ($paginator->lastPage() > 1)
 <nav class="pagination" role="navigation" aria-label="pagination">
-	<a href="{{ ($paginator->currentPage() > 1)? $paginator->url($paginator->currentPage()-1):'#' }}" 
-		class="pagination-previous" {{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}>
-		Previous
-	</a>
-	<a href="{{ ($paginator->currentPage() < $paginator->lastPage())? $paginator->url($paginator->currentPage()+1):'#' }}" 
-		class="pagination-next" {{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }}>
-		Next page
-	</a>
 	<ul class="pagination-list">
 		@if ($paginator->lastPage() > 10)
 			<?php 
@@ -46,5 +38,13 @@
 			@endfor
 		@endif
 	</ul>
+	<a href="{{ ($paginator->currentPage() > 1)? $paginator->url($paginator->currentPage()-1):'#' }}" 
+		class="pagination-previous" {{ ($paginator->currentPage() == 1) ? ' disabled' : '' }}>
+		Previous
+	</a>
+	<a href="{{ ($paginator->currentPage() < $paginator->lastPage())? $paginator->url($paginator->currentPage()+1):'#' }}" 
+		class="pagination-next" {{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }}>
+		Next page
+	</a>
 </nav>
 @endif
