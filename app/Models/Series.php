@@ -16,4 +16,8 @@ class Series extends Model
     public function tutorials(){
     	return $this->hasMany(Tutorial::class, 'series_id');
     }
+
+    public function scopeMatchKeyword($query, $keyword){
+        return $query->where('title', 'like', "%$keyword%");
+    }
 }

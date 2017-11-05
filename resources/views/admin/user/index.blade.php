@@ -4,7 +4,7 @@
 <nav class="breadcrumb" aria-label="breadcrumbs">
 	<ul>
 		<li><a href="{{ route('admin.home') }}"  aria-current="page">Dashboard</a></li>
-		<li class="is-active"><a href="#">Member</a></li>
+		<li class="is-active"><a href="#">User</a></li>
 	</ul>
 </nav>
 <div class="columns">
@@ -16,7 +16,7 @@
 			<nav class="level">
 				<div class="level-left">
 					<div class="level-item">
-						<span class="title is-3">Members</h3>
+						<span class="title is-3">Users</h3>
 					</div>
 					@if(request()->has('keyword'))
 					<div class="level-item">
@@ -26,12 +26,12 @@
 				</div>
 				<div class="level-right">
 					<div class="level-item">
-						<form action="{{ route('admin.member') }}" method="GET">
+						<form action="{{ route('user.index') }}" method="GET">
 							<div class="field has-addons">
 								<div class="control">
 									<input class="input" type="text" name="keyword" 
 									value="{{ request()->has('keyword') ? request()->input('keyword') : '' }}" 
-									placeholder="Find a member">
+									placeholder="Find an user">
 								</div>
 								<div class="control">
 									<button class="button is-info">
@@ -61,11 +61,11 @@
 						<td>{{ $user->email }}</td>
 						<td>{{ $user->phone }}</td>
 						<td>
-							<a href="#" class="button is-small is-link" title="More Details">
+							<a href="{{ route('user.show', ['user' => $user->id]) }}" class="button is-small is-link" title="More Details">
 								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
 							</a>
-							<a href="#" class="button is-small" title="Edit">
-								<span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+							<a href="{{ route('user.edit', ['user' => $user->id]) }}" class="button is-small" title="Settings">
+								<span class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>
 							</a>
 						</td>
 					</tr>

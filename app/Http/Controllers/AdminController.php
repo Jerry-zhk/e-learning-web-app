@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
+use App\Permission;
+use App\Models\Series;
 
 class AdminController extends Controller
 {
@@ -12,13 +15,4 @@ class AdminController extends Controller
     	return view('admin.home');
     }
 
-    public function member(Request $request){
-    	if ($request->has('keyword')) {
-    		$users = User::MatchKeyword($request->input('keyword'))->paginate(15);
-    	}else{
-    		$users = User::paginate(15);
-    	}
-    	
-    	return view('admin.member', compact('users'));
-    }
 }

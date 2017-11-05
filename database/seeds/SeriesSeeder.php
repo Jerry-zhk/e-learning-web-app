@@ -13,7 +13,7 @@ class SeriesSeeder extends Seeder
     {
         $series = [
         	[
-        		'title' => 'PHP for beginning',
+        		'title' => 'PHP for beginner',
         		'price' => '8',
         		'skills' => ['php']
         	],

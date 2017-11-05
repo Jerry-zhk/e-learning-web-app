@@ -1,24 +1,25 @@
 <nav class="panel">
 	<p class="panel-heading">Manage</p>
-	<a href="@if(Route::currentRouteName() === 'admin.home') # @else {{ route('admin.home') }} @endif"
+	<a href="{{ route('admin.home') }}"
 		class="panel-block @if(Route::currentRouteName() === 'admin.home') is-active @endif">
 		<span class="panel-icon">
 			<i class="fa fa-tachometer" aria-hidden="true"></i>
 		</span>
 		Dashboard
 	</a>
-	<a href="#" class="panel-block">
-		<span class="panel-icon">
-			<i class="fa fa-commenting" aria-hidden="true"></i>
-		</span>
-		Tutorials
-	</a>
-	<a href="@if(Route::currentRouteName() === 'admin.member') # @else {{ route('admin.member') }} @endif"
-		class="panel-block @if(Route::currentRouteName() === 'admin.member') is-active @endif">
+	<a href="{{ route('user.index') }}"
+		class="panel-block @if(Request::segment(2) === 'user') is-active @endif">
 		<span class="panel-icon">
 			<i class="fa fa-user-circle-o" aria-hidden="true"></i>
 		</span>
-		Members
+		Users
+	</a>
+	<a href="{{ route('series.index') }}" 
+		class="panel-block @if(Request::segment(2) === 'series') is-active @endif">
+		<span class="panel-icon">
+			<i class="fa fa-commenting" aria-hidden="true"></i>
+		</span>
+		Series
 	</a>
 	<a href="#" class="panel-block">
 		<span class="panel-icon">

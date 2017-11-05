@@ -10,6 +10,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- JavaScript -->
+    <script src="{{ asset('/js/app.js') }}"></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -52,7 +54,7 @@
                     </div>
                     @endif
                 </div>
-                
+
             </nav>
         </div>
         <div id="app-dropdown-menu" class="box is-hidden" tabindex="-1">

@@ -15,7 +15,8 @@ Auth::routes();
 
 Route::view('/', 'home')->name('home');
 
-Route::prefix('admin')->middleware('role:superadmin|admin')->group(function(){
+Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.home');
-	Route::get('member', 'AdminController@member')->name('admin.member');
+	Route::resource('user', 'Admin\UserController');
+	Route::resource('series', 'Admin\SeriesController');
 });
