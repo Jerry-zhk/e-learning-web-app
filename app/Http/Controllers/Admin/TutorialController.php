@@ -113,6 +113,28 @@ class TutorialController extends Controller
      */
     public function destroy(Series $series, Tutorial $tutorial)
     {
-        //
+        if($tutorial->deleted_at == null){
+            $tutorial->delete();
+            $series->tutorials_count--;
+            $series->save();
+        }
+        return redirect()->route('series.show', ['series' => $series->id]);
+    }
+
+    /**
+     * Reverse the specified resource's deletion.
+     *
+     * @param  \App\Models\Series  $series
+     * @param  \App\Models\Tutorial  $tutorial
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Series $series, Tutorial $tutorial)
+    {
+        if ($tutorial->deleted_at != null) {
+            $tutorial->restore();
+            $series->tutorials_count++;
+            $series->save();
+        }
+        return redirect()->route('series.tutorial.show', ['series' => $series->id, 'tutorial' => $tutorial->id]);
     }
 }

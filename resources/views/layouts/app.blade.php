@@ -84,6 +84,23 @@
         @yield('content')
     </div>
     <div class="footer-wrapper">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-1"></div>
+                <div class="column is-2">
+                    <img src="{{ asset('img/logo.png') }}" style="height: 45px;">
+                </div>
+                <div class="column is-5">
+                    The Hong Kong Polytechnic University Hung Hom, Kowloon, Hong Kong<br>
+                    Copyright © 2017 Overcoded
+                </div>
+                <div class="column is-4">
+                    <img src="{{ asset('img/laravel.png') }}" style="height: 20px;">
+                    <img src="{{ asset('img/bulma.png') }}" style="height: 20px;">
+                    <img src="{{ asset('img/github.png') }}" style="height: 20px;">
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->

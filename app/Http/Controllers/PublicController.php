@@ -47,4 +47,12 @@ class PublicController extends Controller
 
 		return view('search', compact(['skillGroups', 'results']));
 	}
+
+	public function series(Series $series){
+		return view('series', compact('series'));
+	}
+
+	public function tutorial(Tutorial $tutorial){
+		return view('tutorial', compact('tutorial'));
+	}
 }

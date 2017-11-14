@@ -19,6 +19,9 @@
 				<div class="level-left">
 					<div class="level-item">
 						<h3 class="title is-3">{{ $tutorial->title }}</h3>
+						@if($tutorial->deleted_at != null)
+						<span class="tag is-danger m-l-10">Deleted</span>
+						@endif
 					</div>
 				</div>
 				<div class="level-right">
@@ -26,9 +29,23 @@
 						<a href="{{ route('series.tutorial.edit', ['series' => $series->id, 'tutorial' => $tutorial->id]) }}" class="button is-link m-r-5" title="Edit">
 							<span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>&nbsp;Edit
 						</a>
-						<button class="button is-danger" title="Delete">
-							<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
-						</button>
+						@if($tutorial->deleted_at == null)
+						<form action="{{ route('series.tutorial.destroy', ['series' => $series, 'tutorial' => $tutorial->id]) }}" method="POST">
+							{{ csrf_field() }}
+							{{ method_field('DELETE') }}
+							<button class="button is-danger" title="Delete">
+								<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
+							</button>
+						</form>
+						@else
+						<form action="{{ route('series.tutorial.restore', ['series' => $series, 'tutorial' => $tutorial->id]) }}" method="POST">
+							{{ csrf_field() }}
+							{{ method_field('PUT') }}
+							<button class="button is-danger" title="Delete">
+								<span class="icon"><i class="fa fa-undo" aria-hidden="true"></i></span>&nbsp;Restore
+							</button>
+						</form>
+						@endif
 					</div>
 				</div>
 			</nav>

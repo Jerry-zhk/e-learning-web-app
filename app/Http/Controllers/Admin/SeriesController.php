@@ -17,9 +17,9 @@ class SeriesController extends Controller
     public function index(Request $request)
     {
         if ($request->has('keyword') && trim($request->input('keyword')) != '') {
-            $series = Series::MatchKeyword($request->input('keyword'))->paginate(15);
+            $series = Series::withTrashed()->MatchKeyword($request->input('keyword'))->paginate(15);
         }else{
-            $series = Series::paginate(15);
+            $series = Series::withTrashed()->paginate(15);
         }
         
         return view('admin.series.index', compact('series'));
@@ -49,11 +49,13 @@ class SeriesController extends Controller
             'skill' => 'required|array',
             'skill.*' => 'exists:skill,id',
             'price' => 'required|numeric|min:0',
+            'description' => 'string|max:191',
             'is_public' => 'sometimes'
         ]);
         $series = new Series();
         $series->title = $validatedData['title'];
         $series->price = $validatedData['price'];
+        $series->description = $validatedData['description'];
         if (isset($validatedData['is_public'])) $series->is_public = 1;
         $series->save();
         foreach ($validatedData['skill'] as $skill) {
@@ -82,7 +84,7 @@ class SeriesController extends Controller
      */
     public function edit(Series $series)
     {
-        //
+        return view('admin.series.edit', compact('series'));
     }
 
     /**
@@ -94,7 +96,19 @@ class SeriesController extends Controller
      */
     public function update(Request $request, Series $series)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255|unique:series,title,'.$series->id,
+            'price' => 'required|numeric|min:0',
+            'description' => 'string|max:191',
+            'is_public' => 'sometimes'
+        ]);
+        $series->title = $validatedData['title'];
+        $series->price = $validatedData['price'];
+        $series->description = $validatedData['description'];
+        $series->is_public = (isset($validatedData['is_public']) ? 1 : 0);
+        $series->save();
+
+        return redirect()->route('series.show', ['series' => $series->id]);
     }
 
     /**
@@ -105,6 +119,30 @@ class SeriesController extends Controller
      */
     public function destroy(Series $series)
     {
-        //
+        if(!$series->trashed()){
+            foreach($series->tutorials as $tutorial){
+                $tutorial->delete();
+            }
+            $series->delete();
+        }
+        
+        return redirect()->route('series.index'); 
+    }
+
+    /**
+     * Reverse the specified resource's deletion.
+     *
+     * @param  \App\Models\Series  $series
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Series $series)
+    {
+        if ($series->trashed()) {
+            foreach($series->tutorials()->withTrashed()->get() as $tutorial){
+                $tutorial->restore();
+            }
+            $series->restore();
+        }
+        return redirect()->route('series.show', ['series' => $series->id]);
     }
 }

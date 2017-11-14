@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use App\Models\Series;
+use App\Models\Tutorial;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -23,9 +25,24 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
 
         parent::boot();
+
+        Route::bind('series', function ($id) {
+            return Series::withTrashed()->find($id) ?? abort(404);
+        });
+
+        Route::bind('series4public', function ($id) {
+            return Series::find($id) ?? abort(404);
+        });
+
+        Route::bind('tutorial', function ($id) {
+            return Tutorial::withTrashed()->find($id) ?? abort(404);
+        });
+
+        Route::bind('tutorialSlug', function ($slug) {
+            return Tutorial::where('slug', '=', $slug)->first() ?? abort(404);
+        });
     }
 
     /**

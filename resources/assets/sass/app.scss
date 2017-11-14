@@ -41,5 +41,61 @@
 
 .footer-wrapper{
 	position: relative;
-	margin-top: 1em;
+	padding: 20px;
+	margin-top: 2em;
+	background: #4384ed;
+	color: white;
+}
+
+/* accordion */
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ccc;
+}
+
+button.accordion:after {
+	font-family: FontAwesome;
+    content: '\f067'; /* Unicode character for "plus" sign (+) */
+    font-size: 14px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\f068"; /* Unicode character for "minus" sign (-) */
+}
+
+div.accordion-panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+/* unordered list with spacing */
+ul.has-spacing{
+	margin: 5px;
+
+	li{
+		list-style-type: none;
+	}
+
+	li:not(:last-child){
+		margin-bottom: 10px;
+	}
+
 }

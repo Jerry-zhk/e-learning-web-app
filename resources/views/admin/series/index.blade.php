@@ -63,24 +63,24 @@
 				<thead>
 					<tr>
 						<th>Series Title</th>
-						<th># of tutorials</th>
-						<th># of purchases</th>
-						<th>Public</th>
-						<th>Actions</th>
+						<th class="has-text-centered"># of tutorials</th>
+						<th class="has-text-centered"># of purchases</th>
+						<th class="has-text-centered">Public</th>
+						<th class="has-text-centered">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($series as $s)
-					<tr>
+					<tr @if($s->deleted_at != null) class="has-text-grey-light" @endif>
 						<td>{{ $s->title }}</td>
-						<td>{{ $s->tutorials_count }}</td>
-						<td>0</td>
-						<td>{{ ($s->is_public === 1) ? 'Yes' : 'No' }}</td>
-						<td>
+						<td class="has-text-centered">{{ $s->tutorials_count }}</td>
+						<td class="has-text-centered">0</td>
+						<td class="has-text-centered">{{ ($s->is_public === 1) ? 'Yes' : 'No' }}</td>
+						<td class="has-text-centered">
 							<a href="{{ route('series.show', ['series' => $s->id]) }}" class="button is-small is-link" title="More Details">
 								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
 							</a>
-							<a href="#" class="button is-small" title="Edit">
+							<a href="{{ route('series.edit', ['series' => $s->id]) }}" class="button is-small" title="Edit">
 								<span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
 							</a>
 						</td>
@@ -88,6 +88,10 @@
 					@endforeach
 				</tbody>
 			</table>
+			
+			<div class="content">
+				* Record in <span class="has-text-grey-light">grey</span> is deleted.
+			</div>
 			
 			{{$series->render('layouts.pagination', ['paginator' => $series->appends(request()->except('page'))])}}
 		</div>

@@ -7,17 +7,29 @@ $sides: (top, bottom, left, right); // Leave this variable alone
       margin-#{$side}: #{$space}px !important;
     }
 
-    .m-#{$space} {
-      margin: #{$space}px !important;
-    }
-
     .p-#{str-slice($side, 0, 1)}-#{$space} {
       padding-#{$side}: #{$space}px !important;
     }
 
-    .p-##{$space} {
+  }
+
+  .m-tb-#{$space} {
+      margin: #{$space}px 0 !important;
+  }
+  .m-lr-#{$space} {
+      margin: 0 #{$space}px !important;
+  }
+  .m-#{$space} {
+      margin: #{$space}px !important;
+  }
+  .p-tb-#{$space} {
+      padding: #{$space}px 0 !important;
+  }
+  .p-lr-#{$space} {
+      padding: 0 #{$space}px !important;
+  }
+  .p-#{$space} {
       padding: #{$space}px !important;
-    }
   }
 }
 

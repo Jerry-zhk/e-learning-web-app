@@ -15,12 +15,17 @@ Auth::routes();
 
 Route::get('/', 'PublicController@index')->name('home');
 Route::get('search', 'PublicController@search')->name('search');
+Route::get('series/{series4public}', 'PublicController@series')->name('series.public');
+Route::get('tutorial/{tutorialSlug}', 'PublicController@tutorial')->name('tutorial.public');
+Route::post('upload', 'FileUploadController@upload');
 
 Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.home');
 	Route::resource('user', 'Admin\UserController');
-	Route::resource('series', 'Admin\SeriesController');
-	Route::resource('series.tutorial', 'Admin\TutorialController');
-});
 
-Route::post('upload', 'FileUploadController@upload');
+	Route::resource('series', 'Admin\SeriesController');
+	Route::put('series/{series}/restore', 'Admin\SeriesController@restore')->name('series.restore');
+
+	Route::resource('series.tutorial', 'Admin\TutorialController');
+	Route::put('series/{series}/tutorial/{tutorial}/restore', 'Admin\TutorialController@restore')->name('series.tutorial.restore');
+});

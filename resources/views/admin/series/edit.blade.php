@@ -19,35 +19,26 @@
 
 			<div class="columns">
 				<div class="column is-half is-offset-one-quarter">
-					<form action="{{ route('series.store') }}" method="POST">
+					<form action="{{ route('series.update', ['series' => $series->id]) }}" method="POST">
 						{{ csrf_field() }}
+						{{ method_field('PUT') }}
 						<div class="field {{ $errors->has('title') ? ' has-error' : '' }}">
 							<label for="title" class="label">Title</label>
 							<div class="control">
-								<input type="text" id="title" class="input" name="title" value="{{ old('title') }}" placeholder="Eyecatching title here..." required autofocus>
+								<input type="text" id="title" class="input" name="title" value="{{ old('title') == null ? $series->title : old('title') }}" placeholder="Eyecatching title here..." required autofocus>
 							</div>
 							@if ($errors->has('title'))
 							<p class="help is-danger">{{ $errors->first('title') }}</p>
 							@endif
 						</div>
-						<div class="field {{ $errors->has('skills') ? ' has-error' : '' }}">
+						<div class="field">
 							<label for="skill" class="label">Skills</label>
 							<div class="control">
-								<select id="skill" name="skill[]" class="selectize" multiple required>
-									<option value="">Select Series Skills</option>
-									@foreach($skills as $skill)
-									<option value="{{ $skill->id }}"
-										@if(old('skill') != null && !$errors->has('skill.*') && in_array($skill->id, old('skill'))) 
-										selected 
-										@endif
-										>
-										{{ $skill->display_name }}
-									</option>
+								<div class="tags">
+									@foreach($series->skills as $skill)
+									<span class="tag">{{ $skill->display_name }}</span>
 									@endforeach
-								</select>
-								@if ($errors->has('skill.*'))
-								<p class="help is-danger">{{ $errors->first('skill.*') }}</p>
-								@endif
+								</div>
 							</div>
 						</div>
 
@@ -59,13 +50,13 @@
 								</a>
 							</p>
 							<p class="control">
-								<input type="number" id="price" name="price" class="input" min="0" value="0" placeholder="Price" required>
+								<input type="number" id="price" name="price" class="input" min="0" value="{{ old('price') == null ? $series->price : old('price') }}" placeholder="Price" required>
 							</p>
 						</div>
 						<div class="field {{ $errors->has('description') ? ' has-error' : '' }}">
 							<label for="description" class="label">Description</label>
 							<div class="control">
-								<textarea id="description" name="description" class="textarea" placeholder="Type description here...">{{ old('description') }}</textarea>
+								<textarea id="description" name="description" class="textarea" placeholder="Type description here...">{{ old('description') == null ? $series->description : old('description') }}</textarea>
 							</div>
 							@if ($errors->has('description'))
 							<p class="help is-danger">{{ $errors->first('description') }}</p>
@@ -73,7 +64,7 @@
 						</div>
 						<div class="field">
 							<label class="checkbox">
-								<input name="is_public" type="checkbox">
+								<input name="is_public" type="checkbox" @if(old('is_public') != null || $series->is_public == 1) checked @endif>
 								Set Public
 							</label>
 						</div>

@@ -27,8 +27,8 @@ class CreateTutorialTables extends Migration
             $table->string('title');
             $table->integer('tutorials_count')->unsigned()->default(0);
             $table->float('price');
-            $table->string('description');
-            $table->boolean('is_public');
+            $table->string('description')->nullable();
+            $table->boolean('is_public')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
@@ -49,7 +49,6 @@ class CreateTutorialTables extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('body');
-            $table->boolean('is_public')->default(0);
             $table->integer('series_id')->unsigned();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

@@ -18,16 +18,33 @@
 				<div class="level-left">
 					<div class="level-item">
 						<h3 class="title is-3">{{ $series->title }}</h3>
+						@if($series->deleted_at != null)
+						<span class="tag is-danger m-l-10">Deleted</span>
+						@endif
 					</div>
 				</div>
 				<div class="level-right">
 					<div class="level-item">
-						<a href="" class="button is-link m-r-5" title="Edit">
+						<a href="{{ route('series.edit', ['series' => $series->id]) }}" class="button is-link m-r-5" title="Edit">
 							<span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>&nbsp;Edit
 						</a>
-						<button class="button is-danger" title="Delete">
-							<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
-						</button>
+						@if($series->deleted_at == null)
+						<form action="{{ route('series.destroy', ['series' => $series]) }}" method="POST">
+							{{ csrf_field() }}
+							{{ method_field('DELETE') }}
+							<button class="button is-danger" title="Delete">
+								<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
+							</button>
+						</form>
+						@else
+						<form action="{{ route('series.restore', ['series' => $series]) }}" method="POST">
+							{{ csrf_field() }}
+							{{ method_field('PUT') }}
+							<button class="button is-danger" title="Delete">
+								<span class="icon"><i class="fa fa-undo" aria-hidden="true"></i></span>&nbsp;Restore
+							</button>
+						</form>
+						@endif
 					</div>
 				</div>
 			</nav>
@@ -52,6 +69,12 @@
 									<span class="tag">{{ $skill->display_name }}</span>
 									@endforeach
 								</div>
+							</td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td colspan="3">
+								{{ $series->description }}
 							</td>
 						</tr>
 						<tr>
@@ -96,6 +119,7 @@
 					</div>
 				</div>
 			</nav>
+			@if($series->tutorials()->withTrashed()->count() > 0)
 			<table class="table is-fullwidth">
 				<colgroup>
 					<col>
@@ -110,8 +134,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($series->tutorials as $tutorial)
-					<tr>
+					@foreach($series->tutorials()->withTrashed()->get() as $tutorial)
+					<tr @if ($tutorial->deleted_at != null) class="has-text-grey-light" @endif>
 						<td>{{ $tutorial->title }}</td>
 						<td class="has-text-centered">{{ $tutorial->slug }}</td>
 						<td class="has-text-centered">
@@ -126,6 +150,16 @@
 					@endforeach
 				</tbody>
 			</table>
+			<div class="content">
+				* Record in <span class="has-text-grey-light">grey</span> is deleted.
+			</div>
+			@else
+			<article class="message">
+			  	<div class="message-body">
+			  		No tutorial yet...
+			  	</div>
+			</article>
+			@endif
 		</div>
 
 	</div>

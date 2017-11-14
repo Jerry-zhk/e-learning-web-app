@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Series extends Model
 {
+    use SoftDeletes;
     protected $table = 'series';
+    protected $dates = ['deleted_at'];
 
     public function skills(){
     	return $this->belongsToMany(Skill::class, 'skill_series', 'series_id', 'skill_id');
