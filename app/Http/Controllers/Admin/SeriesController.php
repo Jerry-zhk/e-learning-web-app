@@ -66,7 +66,7 @@ class SeriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Series  $series
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
     public function show(Series $series)
@@ -77,7 +77,7 @@ class SeriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Series  $series
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
     public function edit(Series $series)
@@ -89,7 +89,7 @@ class SeriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Series  $series
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Series $series)
@@ -100,7 +100,7 @@ class SeriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Series  $series
+     * @param  \App\Models\Series  $series
      * @return \Illuminate\Http\Response
      */
     public function destroy(Series $series)

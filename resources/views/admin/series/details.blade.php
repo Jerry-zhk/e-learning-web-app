@@ -17,7 +17,7 @@
 			<nav class="level">
 				<div class="level-left">
 					<div class="level-item">
-						<h3 class="title is-3">{{ $series->title }} (ID:{{ $series->id }})</h3>
+						<h3 class="title is-3">{{ $series->title }}</h3>
 					</div>
 				</div>
 				<div class="level-right">
@@ -82,31 +82,48 @@
 		</div>
 
 		<div class="box">
-			<h4 class="title is-4">Tutorials</h4>
+			<nav class="level">
+				<div class="level-left">
+					<div class="level-item">
+						<h3 class="title is-3">Tutorials</h3>
+					</div>
+				</div>
+				<div class="level-right">
+					<div class="level-item">
+						<a href="{{ route('series.tutorial.create', ['series' => $series->id]) }}" class="button" title="New Tutorial">
+							<span class="icon"><i class="fa fa-plus" aria-hidden="true"></i></span>&nbsp;New Tutorial
+						</a>
+					</div>
+				</div>
+			</nav>
 			<table class="table is-fullwidth">
 				<colgroup>
 					<col>
-					<col style="width: 100px">
 					<col style="width: 200px">
 					<col style="width: 200px">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>Series Name</th>
-						<th class="has-text-centered">Price ($)</th>
-						<th class="has-text-centered">Transaction ID</th>
-						<th class="has-text-centered">Purchased At</th>
+						<th class="has-text-centered">Slug</th>
+						<th class="has-text-centered">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					@for($i = 0; $i < 5; $i++)
+					@foreach($series->tutorials as $tutorial)
 					<tr>
-						<td>PHP for beginners</td>
-						<td class="has-text-centered">8</td>
-						<td class="has-text-centered">273858687363</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
+						<td>{{ $tutorial->title }}</td>
+						<td class="has-text-centered">{{ $tutorial->slug }}</td>
+						<td class="has-text-centered">
+							<a href="{{ route('series.tutorial.show', ['series' => $series->id, 'tutorial' => $tutorial->id]) }}" class="button is-small is-link" title="More Details">
+								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
+							</a>
+							<a href="#" class="button is-small" title="Public Link">
+								<span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
+							</a>
+						</td>
 					</tr>
-					@endfor
+					@endforeach
 				</tbody>
 			</table>
 		</div>

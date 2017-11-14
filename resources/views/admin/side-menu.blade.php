@@ -15,11 +15,11 @@
 		Users
 	</a>
 	<a href="{{ route('series.index') }}" 
-		class="panel-block @if(Request::segment(2) === 'series') is-active @endif">
+		class="panel-block @if(Request::segment(2) === 'series' || Request::segment(2) === 'tutorial') is-active @endif">
 		<span class="panel-icon">
 			<i class="fa fa-commenting" aria-hidden="true"></i>
 		</span>
-		Series
+		Series &#38; Tutorials
 	</a>
 	<a href="#" class="panel-block">
 		<span class="panel-icon">

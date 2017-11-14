@@ -14713,6 +14713,10 @@ label.panel-block:hover {
   padding: 100px !important;
 }
 
+.full-width {
+  width: 100% !important;
+}
+
 .header-wrapper {
   position: relative;
   margin-bottom: 1em;

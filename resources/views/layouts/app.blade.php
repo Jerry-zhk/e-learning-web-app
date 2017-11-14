@@ -27,7 +27,7 @@
                 <div class="navbar-menu">
                     <div class="navbar-start">
                         <a id="app-dropdown-menu-toggle" class="navbar-link" href="javascript:void(0);">Courses</a>
-                        <a class="navbar-item">Store</a>                    
+                        <a class="navbar-item" href="{{ route('search') }}">Search</a>                    
                     </div>
                     @if (Route::has('login'))
                     <div class="navbar-end">
@@ -36,6 +36,7 @@
                             <a class="navbar-link">{{ Auth::user()->name }}</a>
                             <div class="navbar-dropdown">
                                 <a class="navbar-item" href="">My account</a>
+                                <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
                                 <a class="navbar-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

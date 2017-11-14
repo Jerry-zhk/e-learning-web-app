@@ -17,6 +17,7 @@
     "jquery": "^3.2.1",
     "laravel-mix": "^1.0",
     "lodash": "^4.17.4",
-    "selectize": "^0.12.4"
+    "selectize": "^0.12.4",
+    "tinymce": "^4.7.2"
   }
 }

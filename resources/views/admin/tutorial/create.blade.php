@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('content')
+
+<script src="{{ asset('tinymce/tinymce.js') }}"></script>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+	<ul>
+		<li><a href="{{ route('admin.home') }}"  aria-current="page">Dashboard</a></li>
+		<li><a href="{{ route('series.index') }}"  aria-current="page">Series</a></li>
+		<li><a href="{{ route('series.show', ['series' => $series]) }}"  aria-current="page">{{ $series->title }}</a></li>
+		<li class="is-active"><a href="#">New Tutorial</a></li>
+	</ul>
+</nav>
+<div class="columns">
+	<div class="column is-one-quarter">
+		@include('admin.side-menu')
+	</div>
+	<div class="column">
+		<div class="box">
+			<h3 class="title is-3">New Tutorial</h3>
+			<form action="{{ route('series.tutorial.store', ['series' => $series->id]) }}" method="POST">
+				{{ csrf_field() }}
+				<div class="field {{ $errors->has('title') ? ' has-error' : '' }}">
+					<label for="title" class="label">Title</label>
+					<div class="control">
+						<input type="text" id="title" class="input" name="title" value="{{ old('title') }}" required autofocus>
+					</div>
+					@if ($errors->has('title'))
+					<p class="help is-danger">{{ $errors->first('title') }}</p>
+					@endif
+				</div>
+				<div class="field {{ $errors->has('slug') ? ' has-error' : '' }}">
+					<label for="slug" class="label">Slug</label>
+					<div class="control">
+						<input type="text" id="slug" class="input" name="slug" value="{{ old('slug') }}" placeholder="Only aphlabets and dash ( - )" required >
+					</div>
+					@if ($errors->has('slug'))
+					<p class="help is-danger">{{ $errors->first('slug') }}</p>
+					@endif
+				</div>
+				<div class="field {{ $errors->has('body') ? ' has-error' : '' }}"">
+					<label for="tinymce" class="label">Body</label>
+					<div class="control">
+						<textarea id="tinymce" name="body" rows="15">{{ old('body') }}</textarea>
+					</div>
+					@if ($errors->has('body'))
+					<p class="help is-danger">{{ $errors->first('body') }}</p>
+					@endif
+				</div>
+				<div class="field">
+					<div class="control">
+						<button class="button is-danger" title="Delete">
+							<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Create
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+@endsection
