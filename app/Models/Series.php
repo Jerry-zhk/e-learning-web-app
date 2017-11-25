@@ -20,7 +20,19 @@ class Series extends Model
     	return $this->hasMany(Tutorial::class, 'series_id');
     }
 
+    public function purchases(){
+        return $this->hasMany(SeriesPurchase::class, 'series_id');
+    }
+
     public function scopeMatchKeyword($query, $keyword){
         return $query->where('title', 'like', "%$keyword%");
+    }
+
+    public function events(){
+        return $this->morphMany(Event::class, 'model');
+    }
+
+    public function getPurchaseCountAttribute(){
+        return $this->purchases->count();
     }
 }

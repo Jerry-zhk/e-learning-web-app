@@ -52,9 +52,6 @@ class TutorialController extends Controller
         $tutorial->series_id = $series->id;
         $tutorial->save();
 
-        $series->tutorials_count++;
-        $series->save();
-
         return redirect()->route('series.show', ['series' => $series->id]);
 
     }
@@ -113,11 +110,9 @@ class TutorialController extends Controller
      */
     public function destroy(Series $series, Tutorial $tutorial)
     {
-        if($tutorial->deleted_at == null){
+        if($tutorial->deleted_at == null)
             $tutorial->delete();
-            $series->tutorials_count--;
-            $series->save();
-        }
+        
         return redirect()->route('series.show', ['series' => $series->id]);
     }
 
@@ -130,11 +125,9 @@ class TutorialController extends Controller
      */
     public function restore(Series $series, Tutorial $tutorial)
     {
-        if ($tutorial->deleted_at != null) {
+        if ($tutorial->deleted_at != null) 
             $tutorial->restore();
-            $series->tutorials_count++;
-            $series->save();
-        }
+        
         return redirect()->route('series.tutorial.show', ['series' => $series->id, 'tutorial' => $tutorial->id]);
     }
 }

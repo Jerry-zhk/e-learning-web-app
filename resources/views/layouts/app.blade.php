@@ -35,7 +35,7 @@
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link">{{ Auth::user()->name }}</a>
                             <div class="navbar-dropdown">
-                                <a class="navbar-item" href="">My account</a>
+                                <a class="navbar-item" href="{{ route('profile.index') }}">My account</a>
                                 <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
                                 <a class="navbar-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
@@ -62,20 +62,41 @@
             <div class="container">
                 <div class="columns">
                     <div class="column has-text-centered">
-                        A
-                        <hr />
+                        Programming Language
+                        <hr>
                         <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
+                            @foreach($skillsList['Programming Language'] as $skill)
+                            <li><a href="{{ route('search') }}?skill[]={{ $skill['id'] }}">{{$skill['display_name']}} ({{$skill['series_count']}})</a></li>
+                            @endforeach
                         </ul>
                     </div>
-                    <div class="column has-text-centered">B</div>
-                    <div class="column has-text-centered">C</div>
-                    <div class="column has-text-centered">D</div>
-                    <div class="column has-text-centered">E</div>
+                    <div class="column has-text-centered">
+                        Framework
+                        <hr>
+                        <ul>
+                            @foreach($skillsList['Framework'] as $skill)
+                            <li><a href="{{ route('search') }}?skill[]={{ $skill['id'] }}">{{$skill['display_name']}} ({{$skill['series_count']}})</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="column has-text-centered">
+                        Database
+                        <hr>
+                        <ul>
+                            @foreach($skillsList['Database'] as $skill)
+                            <li><a href="{{ route('search') }}?skill[]={{ $skill['id'] }}">{{$skill['display_name']}} ({{$skill['series_count']}})</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="column has-text-centered">
+                        Must-have Skill
+                        <hr>
+                        <ul>
+                            @foreach($skillsList['Must-have Skill'] as $skill)
+                            <li><a href="{{ route('search') }}?skill[]={{ $skill['id'] }}">{{$skill['display_name']}} ({{$skill['series_count']}})</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

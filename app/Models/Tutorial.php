@@ -18,4 +18,8 @@ class Tutorial extends Model
     public function scopeMatchKeyword($query, $keyword){
         return $query->where('title', 'like', "%$keyword%");
     }
+
+    public function events(){
+        return $this->morphMany(Event::class, 'model');
+    }
 }

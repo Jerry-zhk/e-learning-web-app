@@ -87,9 +87,9 @@
 						</tr>
 						<tr>
 							<th># of toturials</th>
-							<td>{{ $series->tutorials_count }}</td>
+							<td>{{ $series->tutorials()->withTrashed()->count() }}</td>
 							<th># of purchases</th>
-							<td>0</td>
+							<td>{{ $series->purchases->count() }}</td>
 						</tr>
 						<tr>
 							<th>Created At</th>

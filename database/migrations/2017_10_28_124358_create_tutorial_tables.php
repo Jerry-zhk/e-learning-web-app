@@ -25,7 +25,6 @@ class CreateTutorialTables extends Migration
         Schema::create('series', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('tutorials_count')->unsigned()->default(0);
             $table->float('price');
             $table->string('description')->nullable();
             $table->boolean('is_public')->default(0);

@@ -17,7 +17,17 @@ Route::get('/', 'PublicController@index')->name('home');
 Route::get('search', 'PublicController@search')->name('search');
 Route::get('series/{series4public}', 'PublicController@series')->name('series.public');
 Route::get('tutorial/{tutorialSlug}', 'PublicController@tutorial')->name('tutorial.public');
+Route::post('series/{series4public}/purchase', 'PublicController@seriesPurchase')->name('series.purchase');
 Route::post('upload', 'FileUploadController@upload');
+
+
+Route::prefix('profile')->group(function(){
+	Route::get('/', 'ProfileController@index')->name('profile.index');
+	Route::get('edit', 'ProfileController@edit')->name('profile.edit');
+	Route::put('update', 'ProfileController@update')->name('profile.update');
+	Route::get('series-purchased', 'ProfileController@series')->name('profile.series');
+	Route::get('activities', 'ProfileController@activities')->name('profile.activities');
+});
 
 Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.home');
@@ -28,4 +38,15 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(fun
 
 	Route::resource('series.tutorial', 'Admin\TutorialController');
 	Route::put('series/{series}/tutorial/{tutorial}/restore', 'Admin\TutorialController@restore')->name('series.tutorial.restore');
+});
+
+
+Route::get('/collection', function(){
+	$tutorials =  \App\Models\Tutorial::get();
+    $series = \App\Models\Series::get();
+    $c = collect($tutorials);
+    $b = collect($series);
+    $d = $c->merge($b);
+
+    dd($d);    
 });

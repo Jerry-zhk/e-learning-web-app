@@ -18,16 +18,22 @@
 		</p>
 		<p class="m-b-20">{{$series->description}}</p>
 		
-		@if(true)
+		@if($series->price == 0)
+		<p class="has-text-weight-semibold">This Series is Free!</p>
+		@endif
+
+		@if(!$user->accessibleToSeries($series))
 		<p>
 			You have to purchase the series before start the tutorial...<br/>
-			<form action="" method="POST" class="m-t-5">
+			<form action="{{ route('series.purchase', ['series4public' => $series->id]) }}" method="POST" class="m-t-5">
+				{{ csrf_field() }}
 				<button class="button is-success">Purchase ${{$series->price}}</button>
 			</form>
 		</p>
 		@endif
+
 	</div>
-	@if(true)
+	@if($user->accessibleToSeries($series))
 	<hr>
 	<div class="content">
 		<h6 class="title is-6 has-text-centered">{{$series->tutorials->count()}} Tutorials</h6>

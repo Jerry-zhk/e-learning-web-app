@@ -73,8 +73,8 @@
 					@foreach ($series as $s)
 					<tr @if($s->deleted_at != null) class="has-text-grey-light" @endif>
 						<td>{{ $s->title }}</td>
-						<td class="has-text-centered">{{ $s->tutorials_count }}</td>
-						<td class="has-text-centered">0</td>
+						<td class="has-text-centered">{{ $s->tutorials()->withTrashed()->count() }}</td>
+						<td class="has-text-centered">{{ $s->purchases->count() }}</td>
 						<td class="has-text-centered">{{ ($s->is_public === 1) ? 'Yes' : 'No' }}</td>
 						<td class="has-text-centered">
 							<a href="{{ route('series.show', ['series' => $s->id]) }}" class="button is-small is-link" title="More Details">

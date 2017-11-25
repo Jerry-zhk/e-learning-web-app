@@ -52,26 +52,12 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach($activities as $activity)
 					<tr>
-						<td><a href="#">@jerryzhou</a> has purchased series <a href="#">PHP for beginner</a></td>
-						<td class="has-text-centered">2017-10-28 17:08</td>
+						<td>{!! $activity->renderHTML4Admin() !!}</td>
+						<td class="has-text-centered">{{ $activity->created_at }}</td>
 					</tr>
-					<tr>
-						<td><a href="#">@jerryzhou</a> has joined us</td>
-						<td class="has-text-centered">2017-10-28 13:08</td>
-					</tr>
-					<tr>
-						<td><a href="#">@ivanmok</a> has joined us</td>
-						<td class="has-text-centered">2017-10-28 12:08</td>
-					</tr>
-					<tr>
-						<td><a href="#">@flamyli</a> has joined us</td>
-						<td class="has-text-centered">2017-10-28 12:08</td>
-					</tr>
-					<tr>
-						<td><a href="#">@jackyangara</a> has joined us</td>
-						<td class="has-text-centered">2017-10-28 12:08</td>
-					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

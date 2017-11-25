@@ -92,24 +92,27 @@
 					<col style="width: 100px">
 					<col style="width: 200px">
 					<col style="width: 200px">
+					<col style="width: 200px">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>Series Name</th>
 						<th class="has-text-centered">Price ($)</th>
+						<th class="has-text-centered">Credit Card</th>
 						<th class="has-text-centered">Transaction ID</th>
 						<th class="has-text-centered">Purchased At</th>
 					</tr>
 				</thead>
 				<tbody>
-					@for($i = 0; $i < 5; $i++)
+					@foreach($user->seriesPurchases as $purchase)
 					<tr>
-						<td>PHP for beginners</td>
-						<td class="has-text-centered">8</td>
-						<td class="has-text-centered">273858687363</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
+						<td>{{ $purchase->series->title }}</td>
+						<td class="has-text-centered">{{ $purchase->price }}</td>
+						<td class="has-text-centered">{{ $purchase->credit_card_no }}</td>
+						<td class="has-text-centered">{{ $purchase->transaction_id }}</td>
+						<td class="has-text-centered">{{ $purchase->created_at }}</td>
 					</tr>
-					@endfor
+					@endforeach
 				</tbody>
 			</table>
 		</div>

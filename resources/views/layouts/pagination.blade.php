@@ -44,7 +44,7 @@
 	</a>
 	<a href="{{ ($paginator->currentPage() < $paginator->lastPage())? $paginator->url($paginator->currentPage()+1):'#' }}" 
 		class="pagination-next" {{ ($paginator->currentPage() == $paginator->lastPage()) ? ' disabled' : '' }}>
-		Next page
+		Next
 	</a>
 </nav>
 @endif

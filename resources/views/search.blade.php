@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
+<nav class="breadcrumb" aria-label="breadcrumbs">
+	<ul>
+		<li><a href="{{ route('home') }}" aria-current="page">Home</a></li>
+		<li class="is-active"><a href="#">Search</a></li>
+	</ul>
+</nav>
 <div class="columns">
 	<div class="column is-10 is-offset-1">
 		<form action="" method="GET">
@@ -20,13 +25,13 @@
 			<button type="button" class="accordion">Filter</button>
 			<div class="field accordion-panel">
 				<p class="is-size-5 has-text-weight-bold">Skills</p>
-				@foreach($skillGroups as $type => $skills)
+				@foreach($skillsList as $type => $skills)
 					<p class="has-text-weight-semibold">{{ $type }}</p>
 					@foreach($skills as $skill)
 						<label class="checkbox" style="width: 19.5%;">
-							<input type="checkbox" name="skill[]" value="{{ $skill->id }}" 
-							{{ (request()->has('skill') && in_array($skill->id, request()->input('skill'))) ? 'checked' : '' }}>
-							{{ $skill->display_name }}
+							<input type="checkbox" name="skill[]" value="{{ $skill['id'] }}" 
+							{{ (request()->has('skill') && in_array($skill['id'], request()->input('skill'))) ? 'checked' : '' }}>
+							{{ $skill['display_name'] }}
 						</label>
 					@endforeach
 				@endforeach
@@ -49,8 +54,14 @@
 							<div class="media-content">
 								<div class="has-text-weight-semibold is-size-6"><a href="{{ route('series.public', ['series4public' => $object->id]) }}">{{ $object->title }}</a></div>
 								<div class="has-text-grey-dark is-size-7">
-									<span class="m-r-20">Popularity: 1522</span>
-									<span class="m-r-20"># of Tutorials: 12</span>
+									<span class="m-r-20">Popularity: {{ $object->purchase_count }}</span>
+									<span class="m-r-20"># of Tutorials: {{ $object->tutorials()->count() }}</span>
+									<div>
+										Skills: 
+										@foreach($object->skills as $skill)
+										<span class="tag">{{ $skill->display_name }}</span>
+										@endforeach
+									</div>
 									<div>Description: {{ $object->description }}</div>
 								</div>
 							</div>
