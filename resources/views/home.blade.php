@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container has-text-centered">
+    <h1 class="is-size-2 has-text-grey has-text-weight-bold">Coding at its finest!</h1>
+    <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, choose one of the topic, have fun.</h2>
+</div>
+<hr>
+
 @if(isset($new_tutorials))
 <section class="section">
 	<div class="level">
