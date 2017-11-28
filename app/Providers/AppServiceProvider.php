@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Skill;
+//use Illuminate\Support\Facades\Log;
+//use Illuminate\Support\Facades\Crypt;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -16,9 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //$encrypted = Crypt::encryptString('Hello world.');
+        //Log::debug($encrypted);
         Schema::defaultStringLength(191);
-        $skills = Skill::get()->groupBy('type')->toArray();
-        view()->share('skillsList', $skills);
     }
 
     /**

@@ -27,7 +27,6 @@ class CreateTutorialTables extends Migration
             $table->string('title');
             $table->float('price');
             $table->string('description')->nullable();
-            $table->boolean('is_public')->default(0);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();

@@ -15,7 +15,7 @@
 	
 	<div class="column">
 		<div class="box">
-			<h3 class="title is-3">New Series</h3>
+			<h3 class="title is-3">Edit Series</h3>
 
 			<div class="columns">
 				<div class="column is-half is-offset-one-quarter">
@@ -61,12 +61,6 @@
 							@if ($errors->has('description'))
 							<p class="help is-danger">{{ $errors->first('description') }}</p>
 							@endif
-						</div>
-						<div class="field">
-							<label class="checkbox">
-								<input name="is_public" type="checkbox" @if(old('is_public') != null || $series->is_public == 1) checked @endif>
-								Set Public
-							</label>
 						</div>
 						<div class="field">
 							<div class="control">

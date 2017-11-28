@@ -93,7 +93,7 @@
                             @endif
                         </div>
                     </div>
-                    <div class="field-body">
+                    <div class="field-body m-b-15">
                         <div class="field">
                             <label for="age" class="label">Age</label>
                             <div class="control">

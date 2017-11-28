@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
     	$roleMember = App\Role::where('name', '=', 'member')->first();
         factory(App\User::class, 10)->create()->each(function($u) use ($roleMember) {
-                $u->attachRole($roleMember);
+                //$u->attachRole($roleMember);
          });
     }
 }

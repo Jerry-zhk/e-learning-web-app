@@ -49,14 +49,12 @@ class SeriesController extends Controller
             'skill' => 'required|array',
             'skill.*' => 'exists:skill,id',
             'price' => 'required|numeric|min:0',
-            'description' => 'string|max:191',
-            'is_public' => 'sometimes'
+            'description' => 'string|max:191'
         ]);
         $series = new Series();
         $series->title = $validatedData['title'];
         $series->price = $validatedData['price'];
         $series->description = $validatedData['description'];
-        if (isset($validatedData['is_public'])) $series->is_public = 1;
         $series->save();
         foreach ($validatedData['skill'] as $skill) {
             $series->skills()->attach($skill);
@@ -99,13 +97,11 @@ class SeriesController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255|unique:series,title,'.$series->id,
             'price' => 'required|numeric|min:0',
-            'description' => 'string|max:191',
-            'is_public' => 'sometimes'
+            'description' => 'string|max:191'
         ]);
         $series->title = $validatedData['title'];
         $series->price = $validatedData['price'];
         $series->description = $validatedData['description'];
-        $series->is_public = (isset($validatedData['is_public']) ? 1 : 0);
         $series->save();
 
         return redirect()->route('series.show', ['series' => $series->id]);

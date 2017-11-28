@@ -58,14 +58,12 @@
 					<col style="width: 150px;">
 					<col style="width: 150px;">
 					<col style="width: 100px;">
-					<col style="width: 100px;">
 				</colgroup>
 				<thead>
 					<tr>
 						<th>Series Title</th>
 						<th class="has-text-centered"># of tutorials</th>
 						<th class="has-text-centered"># of purchases</th>
-						<th class="has-text-centered">Public</th>
 						<th class="has-text-centered">Actions</th>
 					</tr>
 				</thead>
@@ -75,7 +73,6 @@
 						<td>{{ $s->title }}</td>
 						<td class="has-text-centered">{{ $s->tutorials()->withTrashed()->count() }}</td>
 						<td class="has-text-centered">{{ $s->purchases->count() }}</td>
-						<td class="has-text-centered">{{ ($s->is_public === 1) ? 'Yes' : 'No' }}</td>
 						<td class="has-text-centered">
 							<a href="{{ route('series.show', ['series' => $s->id]) }}" class="button is-small is-link" title="More Details">
 								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
