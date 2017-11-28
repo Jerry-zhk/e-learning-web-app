@@ -16,7 +16,7 @@
 			<nav class="level">
 				<div class="level-left">
 					<div class="level-item">
-						<span class="title is-3">Users</h3>
+						<span class="title is-3">Users</span>
 					</div>
 					@if(request()->has('keyword'))
 					<div class="level-item">

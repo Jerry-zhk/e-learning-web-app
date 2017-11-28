@@ -3,181 +3,193 @@
 @section('content')
 <div class="container has-text-centered">
     <h1 class="is-size-2 has-text-grey has-text-weight-bold">Coding at its finest!</h1>
-    <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, choose one of the topic, have fun.</h2>
+    <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, select one of the topics, have fun.</h2>
+    <!------------------------Slider--------------------------->
+    <div id="slider">
+        <ul id="sliderWrap">
+        <li></li>
+        <li></li>
+        <li></li>
+        </ul>
+        <a href="#" id="prev">&#8810;</a>
+        <a href="#" id="next">&#8811;</a>
+    </div>
+    <!------------------------Slider--------------------------->
+    <img src="{{ asset('img/welcome1.jpg') }}" height="10%"/>
 </div>
 <hr>
 
 @if(isset($new_tutorials))
 <section class="section">
-	<div class="level">
-		<div class="level-left">
-			<div class="level-item">
-				<h5 class="title is-5">New Purchased Tutorials</h5>
-			</div>
-		</div>
-		<div class="level-right">
-			<div class="level-item">
-				<a href="#">
-					Show All
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="columns is-multiline">
-		@foreach($new_tutorials as $tutorial)
-		<div class="column is-one-third">
-			<a href="{{ route('tutorial.public', ['tutorial4public' => $tutorial->slug]) }}">
-				<div class="card">
-					<div class="card-content">
-						<div class="media">
-							<div class="media-content">
-								<p class="title is-4">{{ $tutorial->title }}</p>
-								<p class="subtitle is-6">@ {{ $tutorial->series->title }}</p>
-							</div>
-						</div>
-						<div class="content" style="text-overflow: ellipsis; height: 48px; overflow: hidden;">
-							Introduction: 
-							<?php 
-								$bodyWithoutTags = strip_tags($tutorial->body);
-								echo (strlen($bodyWithoutTags) > 250) ? substr($bodyWithoutTags, 0, 250) . '...' : $bodyWithoutTags;
-							?>
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		@endforeach
-	</div>
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <h5 class="title is-5">New Purchased Tutorials</h5>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="#">
+                    Show All
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        @foreach($new_tutorials as $tutorial)
+        <div class="column is-one-third">
+            <a href="{{ route('tutorial.public', ['tutorial4public' => $tutorial->slug]) }}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ $tutorial->title }}</p>
+                                <p class="subtitle is-6">@ {{ $tutorial->series->title }}</p>
+                            </div>
+                        </div>
+                        <div class="content" style="text-overflow: ellipsis; height: 48px; overflow: hidden;">
+                            Introduction: 
+                            <?php 
+                            $bodyWithoutTags = strip_tags($tutorial->body);
+                            echo (strlen($bodyWithoutTags) > 250) ? substr($bodyWithoutTags, 0, 250) . '...' : $bodyWithoutTags;
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
 </section>
 @endif
 <section class="section">
-	<div class="level">
-		<div class="level-left">
-			<div class="level-item">
-				<h5 class="title is-5">Popular Series</h5>
-			</div>
-		</div>
-		<div class="level-right">
-			<div class="level-item">
-				<a href="#">
-					Show All
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="columns is-multiline">
-		@foreach($popularSeries as $series)
-		<div class="column is-one-third">
-			<a href="{{ route('series.public', ['series' => $series->id]) }}">
-				<div class="card">
-					<div class="card-content">
-						<div class="media">
-							<div class="media-content">
-								<p class="title is-4">{{ $series->title }}</p>
-							</div>
-						</div>
-						<div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
-							Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
-							<br>
-							Skills: 
-							@foreach($series->skills as $skill)
-							<span class="tag">{{ $skill->display_name }}</span>
-							@endforeach
-							<br>
-							Description: {{ $series->description }}
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		@endforeach
-	</div>
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <h5 class="title is-5">Popular Series</h5>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="#">
+                    Show All
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        @foreach($popularSeries as $series)
+        <div class="column is-one-third">
+            <a href="{{ route('series.public', ['series' => $series->id]) }}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ $series->title }}</p>
+                            </div>
+                        </div>
+                        <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
+                            Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
+                            <br>
+                            Skills: 
+                            @foreach($series->skills as $skill)
+                            <span class="tag">{{ $skill->display_name }}</span>
+                            @endforeach
+                            <br>
+                            Description: {{ $series->description }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
 </section>
 <section class="section">
-	<div class="level">
-		<div class="level-left">
-			<div class="level-item">
-				<h5 class="title is-5">New Series</h5>
-			</div>
-		</div>
-		<div class="level-right">
-			<div class="level-item">
-				<a href="#">
-					Show All
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="columns is-multiline">
-		@foreach($newSeries as $series)
-		<div class="column is-one-third">
-			<a href="{{ route('series.public', ['series' => $series->id]) }}">
-				<div class="card">
-					<div class="card-content">
-						<div class="media">
-							<div class="media-content">
-								<p class="title is-4">{{ $series->title }}</p>
-							</div>
-						</div>
-						<div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
-							Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
-							<br>
-							Skills: 
-							@foreach($series->skills as $skill)
-							<span class="tag">{{ $skill->display_name }}</span>
-							@endforeach
-							<br>
-							Description: {{ $series->description }}
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		@endforeach
-	</div>
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <h5 class="title is-5">New Series</h5>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="#">
+                    Show All
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        @foreach($newSeries as $series)
+        <div class="column is-one-third">
+            <a href="{{ route('series.public', ['series' => $series->id]) }}">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ $series->title }}</p>
+                            </div>
+                        </div>
+                        <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
+                            Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
+                            <br>
+                            Skills: 
+                            @foreach($series->skills as $skill)
+                            <span class="tag">{{ $skill->display_name }}</span>
+                            @endforeach
+                            <br>
+                            Description: {{ $series->description }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
 </section>
 <section class="section">
-	<div class="level">
-		<div class="level-left">
-			<div class="level-item">
-				<h5 class="title is-5">Free Series</h5>
-			</div>
-		</div>
-		<div class="level-right">
-			<div class="level-item">
-				<a href="{{ route('profile.edit') }}">
-					Show All
-				</a>
-			</div>
-		</div>
-	</div>
-	<div class="columns is-multiline">
-		@foreach($freeSeries as $series)
-		<div class="column is-one-third">
-			<a href="#">
-				<div class="card">
-					<div class="card-content">
-						<div class="media">
-							<div class="media-content">
-								<p class="title is-4">{{ $series->title }}</p>
-							</div>
-						</div>
-						<div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
-							Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
-							<br>
-							Skills: 
-							@foreach($series->skills as $skill)
-							<span class="tag">{{ $skill->display_name }}</span>
-							@endforeach
-							<br>
-							Description: {{ $series->description }}
-						</div>
-					</div>
-				</div>
-			</a>
-		</div>
-		@endforeach
-	</div>
+    <div class="level">
+        <div class="level-left">
+            <div class="level-item">
+                <h5 class="title is-5">Free Series</h5>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="{{ route('profile.edit') }}">
+                    Show All
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="columns is-multiline">
+        @foreach($freeSeries as $series)
+        <div class="column is-one-third">
+            <a href="#">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4">{{ $series->title }}</p>
+                            </div>
+                        </div>
+                        <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
+                            Popularity: {{ $series->purchase_count }} / # of Tutorials: {{ $series->tutorials->count() }}
+                            <br>
+                            Skills: 
+                            @foreach($series->skills as $skill)
+                            <span class="tag">{{ $skill->display_name }}</span>
+                            @endforeach
+                            <br>
+                            Description: {{ $series->description }}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
+    </div>
 </section>
 
 @endsection
