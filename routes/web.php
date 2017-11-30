@@ -33,6 +33,9 @@ Route::prefix('profile')->group(function(){
 Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.home');
 	Route::resource('user', 'Admin\UserController');
+    Route::put('user/{user}/roleUpdate', 'Admin\UserController@roleUpdate')->name('admin.user.role.update');
+    Route::put('user/{user}/permissionUpdate', 'Admin\UserController@permissionUpdate')->name('admin.user.permission.update');
+
 
 	Route::resource('series', 'Admin\SeriesController');
 	Route::put('series/{series}/restore', 'Admin\SeriesController@restore')->name('series.restore');

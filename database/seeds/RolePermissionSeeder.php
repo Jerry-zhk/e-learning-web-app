@@ -16,6 +16,7 @@ class RolePermissionSeeder extends Seeder
     {
 
     	$perms = [
+            //User
     		[
     			'name' => 'user-create',
     			'display_name' => 'User Create',
@@ -31,6 +32,7 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'User Delete',
     			'description' => 'Ability to delete user accounts'
     		],
+            //User roles
     		[
     			'name' => 'user-role-update',
     			'display_name' => 'User Role Update',
@@ -51,6 +53,7 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Role Delete',
     			'description' => 'Ability to delete roles'
     		],
+            //User permission
     		[
     			'name' => 'role-perm-update',
     			'display_name' => 'Role Permission Update',
@@ -71,6 +74,7 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Permission Delete',
     			'description' => 'Ability to delete permissions'
     		],
+            //Series and tutorials
     		[
     			'name' => 'series&tutorial-create',
     			'display_name' => 'Series & Tutorial Create',
@@ -86,6 +90,7 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Series & Tutorial Delete',
     			'description' => 'Ability to delete series and tutorials'
     		],
+            //Transactions
     		[
     			'name' => 'any-transaction-read',
     			'display_name' => 'Transaction Read',
@@ -96,6 +101,7 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Any Transaction Read',
     			'description' => 'Ability to read transactions of tutorial purchase of current user'
     		],
+            //User activities
     		[
     			'name' => 'any-user-activity-read',
     			'display_name' => 'User Activity Read',
@@ -106,11 +112,18 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Any User Activity Read',
     			'description' => 'Ability to read activities of current user'
     		],
+            //Deletion restore
     		[
     			'name' => 'deletion-restore',
     			'display_name' => 'Deletion Restore',
     			'description' => 'Ability to restore a deletion operation'
     		],
+            //User profile
+            [
+    			'name' => 'profile-update',
+    			'display_name' => 'Profile Update',
+    			'description' => 'Ability to modify profile of current user'
+    		]
     	];
 
     	$permissions = array();
@@ -118,7 +131,8 @@ class RolePermissionSeeder extends Seeder
     	foreach ($perms as $perm) {
     		array_push($permissions, Permission::create($perm));
     	}
-
+        
+        //Super admin
     	$superadmin = Role::create([
     		'name' => 'superadmin',
     		'display_name' => 'Super Admin',
@@ -127,6 +141,7 @@ class RolePermissionSeeder extends Seeder
 
     	$superadmin->attachPermissions($permissions);
 
+        //Admin
     	$admin = Role::create([
     		'name' => 'admin',
     		'display_name' => 'Admin',
@@ -143,6 +158,7 @@ class RolePermissionSeeder extends Seeder
     		'self-user-activity-read',
     	]);
 
+        //Member
     	$member = Role::create([
     		'name' => 'member',
     		'display_name' => 'Member',
@@ -153,6 +169,21 @@ class RolePermissionSeeder extends Seeder
     		'self-transaction-read',
     		'self-user-activity-read',
     	]);
+        
+        //Tutor
+        $tutor = Role::create([
+    		'name' => 'tutor',
+    		'display_name' => 'Tutor',
+    		'description' => 'User who can manage teaching materials.'
+    	]);
 
+		$tutor->attachPermissions([
+            'series&tutorial-create',
+            'series&tutorial-update',
+            'series&tutorial-delete'
+    	]);
+        
+        
+        
     }
 }

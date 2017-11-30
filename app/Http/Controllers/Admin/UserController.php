@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Permission;
@@ -66,10 +67,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
+        $roles = Role::get();
+        $userRoles = $user->roles->pluck('id')->toArray();
         $permissions = Permission::get();
         $userPermissions = $user->permissions->pluck('id')->toArray();
-        return view('admin.user.settings', compact(['user', 'permissions', 'userPermissions']));
+        return view('admin.user.settings', compact(['user','roles', 'userRoles', 'permissions', 'userPermissions']));
     }
 
     /**
@@ -93,5 +95,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    
+    public function roleUpdate(Request $request, User $user)
+    {
+        $user->syncRoles($request->input('roles'));
+        return redirect()->route('user.edit', ['user'=>$user->id]);
+    }
+    
+    public function permissionUpdate(Request $request,User $user)
+    {
+        
     }
 }
