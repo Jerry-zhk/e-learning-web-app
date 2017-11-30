@@ -31,7 +31,7 @@ class SeriesSeeder extends Seeder
 
         foreach ($series as $s) {
         	$series_id = DB::table('series')->insertGetId(
-        		['title' => $s['title'], 'price' => $s['price'], 'is_public' => 1]
+        		['title' => $s['title'], 'price' => $s['price']]
         	);
         	foreach ($s['skills'] as $skill_name) {
         		$skill_id = DB::table('skill')->where('name', $skill_name)->first()->id;

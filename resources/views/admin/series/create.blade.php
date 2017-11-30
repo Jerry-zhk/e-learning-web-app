@@ -72,12 +72,6 @@
 							@endif
 						</div>
 						<div class="field">
-							<label class="checkbox">
-								<input name="is_public" type="checkbox">
-								Set Public
-							</label>
-						</div>
-						<div class="field">
 							<div class="control">
 								<button class="button is-danger" title="Delete">
 									<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Create

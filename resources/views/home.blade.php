@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container has-text-centered">
+
+<section class="section has-text-centered">
     <h1 class="is-size-2 has-text-grey has-text-weight-bold">Coding at its finest!</h1>
     <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, select one of the topics, have fun.</h2>
     <!------------------------Slider--------------------------->
@@ -16,7 +17,7 @@
     </div>
     <!------------------------Slider--------------------------->
     <img src="{{ asset('img/welcome1.jpg') }}" height="10%"/>
-</div>
+</section>
 <hr>
 
 @if(isset($new_tutorials))

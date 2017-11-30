@@ -10,11 +10,14 @@ use App\Models\Series;
 use App\Models\Event;
 use Cache;
 use Carbon\Carbon;
+use App\Traits\Encryptable;
+use App\Notifications\sendPasswordResetNotification;
 
 class User extends Authenticatable
 {
     use LaratrustUserTrait;
     use Notifiable;
+    //use Encryptable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'password', 'age', 'phone'
+        'name', 'username', 'email', 'password', 'age', 'phone', 'verify_token'
     ];
 
     /**
@@ -34,10 +37,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $observables = [
-        'registered', 
-        'login',
-        'logout'
+    protected $encryptable = [
+        'name',
     ];
 
     public function scopeMatchKeyword($query, $keyword){
@@ -62,5 +63,13 @@ class User extends Authenticatable
 
     public function events(){
         return $this->hasMany(Event::class, 'user_id')->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Send a password reset email to the user
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new sendPasswordResetNotification($token));
     }
 }

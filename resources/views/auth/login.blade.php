@@ -54,10 +54,6 @@
                         <div class="control">
                             <input id="username" type="username" class="input" name="username" value="{{ old('username') }}" required autofocus>
                         </div>
-
-                        @if ($errors->has('username'))
-                        <p class="help is-danger">{{ $errors->first('username') }}</p>
-                        @endif
                     </div>
 
 
@@ -65,15 +61,7 @@
                         <label for="password" class="label">Password</label>
                         <div class="control">
                             <input id="password" type="password" class="input" name="password" required>
-                            @if ($errors->has('password'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                            @endif
                         </div>
-                        @if ($errors->has('password'))
-                        <p class="help is-danger">{{ $errors->first('password') }}</p>
-                        @endif
                     </div>
 
                     <div class="field">
@@ -84,7 +72,20 @@
                             </label>
                         </div>
                     </div>
-
+                    @if (session()->has('message'))
+                    <article class="message is-info">
+                        <div class="message-body">
+                            {{ session()->get('message') }}
+                        </div>
+                    </article>
+                    @endif
+                    @if ($errors->has('username'))
+                    <article class="message is-danger">
+                        <div class="message-body">
+                            {{ $errors->first('username') }}
+                        </div>
+                    </article>
+                    @endif
                     <div class="field">
                         <div class="control">
                             <button class="button is-success">Login</button>

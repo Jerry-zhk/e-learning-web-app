@@ -12,7 +12,7 @@ class Event extends Model
     public $timestamps = false;
 
     public function model(){
-    	return $this->morphTo();
+    	return $this->morphTo()->withTrashed();
     }
 
     public function user(){

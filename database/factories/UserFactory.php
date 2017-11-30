@@ -24,5 +24,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'age' => $faker->randomDigit,
         'phone' => $faker->phoneNumber,
         'remember_token' => str_random(60),
+        'verify_token' => str_random(60)
     ];
 });

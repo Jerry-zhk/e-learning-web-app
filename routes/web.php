@@ -12,6 +12,7 @@
 */
 
 Auth::routes();
+Route::get('activate', 'Auth\RegisterController@activate')->name('account.activate');
 
 Route::get('/', 'PublicController@index')->name('home');
 Route::get('search', 'PublicController@search')->name('search');
@@ -44,12 +45,7 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(fun
 });
 
 
-Route::get('/collection', function(){
-	$tutorials =  \App\Models\Tutorial::get();
-    $series = \App\Models\Series::get();
-    $c = collect($tutorials);
-    $b = collect($series);
-    $d = $c->merge($b);
-
-    dd($d);    
+Route::get('/email', function(){
+	 \Mail::to('jchong0618@gmail.com')->send(new \App\Mail\AccountActivation());
+	 echo 'sent!';
 });

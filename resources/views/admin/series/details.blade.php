@@ -79,11 +79,7 @@
 						</tr>
 						<tr>
 							<th>Price</th>
-							<td>${{ $series->price }}</td>
-							<th>Public</th>
-							<td>
-								{{ ($series->is_public === 1) ? 'Yes' : 'No' }}
-							</td>
+							<td colspan="3">${{ $series->price }}</td>
 						</tr>
 						<tr>
 							<th># of toturials</th>
