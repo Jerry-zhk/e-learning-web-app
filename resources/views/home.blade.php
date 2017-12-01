@@ -5,7 +5,7 @@
 <section class="section has-text-centered">
     <h1 class="is-size-2 has-text-grey has-text-weight-bold">Coding at its finest!</h1>
     <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, select one of the topics, have fun.</h2>
-    <!------------------------Slider--------------------------->
+    <!--Slider-->
     <div id="slider">
         <ul id="sliderWrap">
         <li></li>
@@ -15,7 +15,7 @@
         <a href="#" id="prev">&#8810;</a>
         <a href="#" id="next">&#8811;</a>
     </div>
-    <!------------------------Slider--------------------------->
+    <!--Slider-->
     <img src="{{ asset('img/welcome1.jpg') }}" height="10%"/>
 </section>
 <hr>
