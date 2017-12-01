@@ -131,14 +131,12 @@
 					</tr>
 				</thead>
 				<tbody>
+				    @foreach($user->events as $event)
 					<tr>
-						<td>{{ $user->username }} has purchased series PHP for beginners.</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
+						<td>{!! $event->renderHTML4Admin() !!}</td>
+						<td class="has-text-centered">{{ $event->created_at }}</td>
 					</tr>
-					<tr>
-						<td>{{ $user->username }} has logged in.</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
-					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

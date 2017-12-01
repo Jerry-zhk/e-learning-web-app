@@ -36,7 +36,10 @@
                             <a class="navbar-link">{{ Auth::user()->name }}</a>
                             <div class="navbar-dropdown">
                                 <a class="navbar-item" href="{{ route('profile.index') }}">My account</a>
-                                <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
+                                <?php $user = Auth::user(); ?>
+                                @if($user->hasRole('admin|superadmin'))
+                                    <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
+                                @endif
                                 <a class="navbar-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
