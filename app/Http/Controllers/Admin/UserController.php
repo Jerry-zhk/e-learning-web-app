@@ -22,7 +22,7 @@ class UserController extends Controller
         }else{
             $users = User::paginate(15);
         }
-        
+
         return view('admin.user.index', compact('users'));
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        
+
         return view('admin.user.details', compact('user'));
     }
 
@@ -96,15 +96,25 @@ class UserController extends Controller
     {
         //
     }
-    
+
     public function roleUpdate(Request $request, User $user)
     {
-        $user->syncRoles($request->input('roles'));
+        if (empty($request->input('roles'))){
+            $user->roles()->detach();
+        } else {
+            $user->syncRoles($request->input('roles'));
+        }   
         return redirect()->route('user.edit', ['user'=>$user->id]);
     }
-    
+
     public function permissionUpdate(Request $request,User $user)
     {
         
+        if (empty($request->input('permissions'))){
+            $user->permissions()->detach();
+        } else {
+            $user->syncPermissions($request->input('permissions'));
+        }   
+        return redirect()->route('user.edit', ['user'=>$user->id]);
     }
 }
