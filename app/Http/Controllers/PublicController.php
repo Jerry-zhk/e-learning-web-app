@@ -17,14 +17,14 @@ class PublicController extends Controller
 		// new tutorials of user purchased series
 		if(Auth::check()){
 			$purchasedSeriesList = Auth::user()->purchased_series_list;
-			$newTutorials = Tutorial::where('created_at', '>', $today->subDays(7))->whereIn('series_id', $purchasedSeriesList)->get();
+			$newTutorials = Tutorial::where('created_at', '>', $today->subDays(7))->whereIn('series_id', $purchasedSeriesList)->get()->take(9);
 		}
 		// popular series
 		$popularSeries = Series::get()->sortByDesc('purchase_count')->take(6);
 		// new series created in past 7 days
 		$newSeries = Series::where('created_at', '>', $today->subDays(7))->orderBy('created_at', 'DESC')->get()->take(6);
 		// free series
-		$freeSeries = Series::where('price', '=', 0)->get()->take(6);
+		$freeSeries = Series::where('price', '=', 0)->orderBy('created_at', 'DESC')->get()->take(6);
 		$view = view('home', compact(['popularSeries', 'newSeries', 'freeSeries']));
 		if(isset($newTutorials))
 			return $view->with('new_tutorials', $newTutorials);
@@ -87,6 +87,7 @@ class PublicController extends Controller
 		$purchase->credit_card_no = str_random(16);
 		$purchase->transaction_id = str_random(12);
 		$purchase->save();
+		event(new \App\Events\SeriesPurchased($user, $series));
 		return redirect()->route('series.public', ['series4public' => $series->id]);
 	}	
 }

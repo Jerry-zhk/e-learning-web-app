@@ -33,10 +33,13 @@
                     <div class="navbar-end">
                         @auth
                         <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">{{ Auth::user()->name }}</a>
+                            <a class="navbar-link">{{ $auth->name }}</a>
                             <div class="navbar-dropdown">
                                 <a class="navbar-item" href="{{ route('profile.index') }}">My account</a>
-                                <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
+                                
+                                @if($auth->hasRole('admin|superadmin|tutor'))
+                                    <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
+                                @endif
                                 <a class="navbar-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

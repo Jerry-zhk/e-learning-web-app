@@ -25,9 +25,6 @@
 						<a href="{{ route('user.edit', ['user' => $user->id]) }}" class="button is-link m-r-5" title="Settings">
 							<span class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>&nbsp;Settings
 						</a>
-						<button class="button is-danger" title="Delete">
-							<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
-						</button>
 					</div>
 				</div>
 			</nav>
@@ -86,6 +83,7 @@
 
 		<div class="box">
 			<h4 class="title is-4">Purchase Record</h4>
+			@if($user->seriesPurchases->count() > 0)
 			<table class="table is-fullwidth">
 				<colgroup>
 					<col>
@@ -115,6 +113,13 @@
 					@endforeach
 				</tbody>
 			</table>
+			@else
+			<article class="message">
+			  	<div class="message-body">
+			  		No series purchased...
+			  	</div>
+			</article>
+			@endif
 		</div>
 
 		<div class="box">
@@ -131,14 +136,12 @@
 					</tr>
 				</thead>
 				<tbody>
+				    @foreach($user->events as $event)
 					<tr>
-						<td>{{ $user->username }} has purchased series PHP for beginners.</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
+						<td>{!! $event->renderHTML4Admin() !!}</td>
+						<td class="has-text-centered">{{ $event->created_at }}</td>
 					</tr>
-					<tr>
-						<td>{{ $user->username }} has logged in.</td>
-						<td class="has-text-centered">2017-10-08 22:00</td>
-					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

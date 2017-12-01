@@ -52,7 +52,14 @@
 								<span class="tag is-link" style="width: 60px;">Series</span>
 							</div>
 							<div class="media-content">
-								<div class="has-text-weight-semibold is-size-6"><a href="{{ route('series.public', ['series4public' => $object->id]) }}">{{ $object->title }}</a></div>
+								<div class="has-text-weight-semibold is-size-6">
+									<a href="{{ route('series.public', ['series4public' => $object->id]) }}">
+										{{ $object->title }}
+										@if($object->price == 0)
+	                                    <span class="tag is-success">FREE</span>
+	                                    @endif
+									</a>
+								</div>
 								<div class="has-text-grey-dark is-size-7">
 									<span class="m-r-20">Popularity: {{ $object->purchase_count }}</span>
 									<span class="m-r-20"># of Tutorials: {{ $object->tutorials()->count() }}</span>

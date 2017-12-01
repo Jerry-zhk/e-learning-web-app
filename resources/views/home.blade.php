@@ -5,20 +5,9 @@
 <section class="section has-text-centered">
     <h1 class="is-size-2 has-text-grey has-text-weight-bold">Coding at its finest!</h1>
     <h2 class="is-size-5 has-text-grey-light has-text-weight-semibold">A modern way to learn coding. Take a deep breath, select one of the topics, have fun.</h2>
-    <!--Slider-->
-    <div id="slider">
-        <ul id="sliderWrap">
-        <li></li>
-        <li></li>
-        <li></li>
-        </ul>
-        <a href="#" id="prev">&#8810;</a>
-        <a href="#" id="next">&#8811;</a>
-    </div>
-    <!--Slider-->
-    <img src="{{ asset('img/welcome1.jpg') }}" height="10%"/>
+    <hr>
+    <img src="{{ asset('img/welcome3.jpg') }}" height="10%"/>
 </section>
-<hr>
 
 @if(isset($new_tutorials))
 <section class="section">
@@ -86,7 +75,12 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
-                                <p class="title is-4">{{ $series->title }}</p>
+                                <p class="title is-4">
+                                    {{ $series->title }} 
+                                    @if($series->price == 0)
+                                    <span class="tag is-success">FREE</span>
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
@@ -129,7 +123,12 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
-                                <p class="title is-4">{{ $series->title }}</p>
+                                <p class="title is-4">
+                                    {{ $series->title }} 
+                                    @if($series->price == 0)
+                                    <span class="tag is-success">FREE</span>
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">
@@ -172,7 +171,12 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
-                                <p class="title is-4">{{ $series->title }}</p>
+                                <p class="title is-4">
+                                    {{ $series->title }} 
+                                    @if($series->price == 0)
+                                    <span class="tag is-success">FREE</span>
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         <div class="content" style="text-overflow: ellipsis; height: 96px; overflow: hidden;">

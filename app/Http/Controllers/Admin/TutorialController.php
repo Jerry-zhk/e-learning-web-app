@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class TutorialController extends Controller
 {
+
+    public function __construct(){
+        parent::__construct();
+        $this->middleware('permission:series&tutorial-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:deletion-restore', ['only' => ['restore']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

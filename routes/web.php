@@ -30,7 +30,7 @@ Route::prefix('profile')->group(function(){
 	Route::get('activities', 'ProfileController@activities')->name('profile.activities');
 });
 
-Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin|tutor'])->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.home');
 	Route::resource('user', 'Admin\UserController');
     Route::put('user/{user}/roleUpdate', 'Admin\UserController@roleUpdate')->name('admin.user.role.update');
@@ -42,10 +42,17 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin'])->group(fun
 
 	Route::resource('series.tutorial', 'Admin\TutorialController');
 	Route::put('series/{series}/tutorial/{tutorial}/restore', 'Admin\TutorialController@restore')->name('series.tutorial.restore');
+
+	Route::prefix('role')->middleware(['role:superadmin'])->group(function(){
+		Route::get('/', 'Admin\RolePermissionController@roleIndex')->name('role.index');
+		Route::get('create', 'Admin\RolePermissionController@roleCreate')->name('role.create');
+		Route::post('store', 'Admin\RolePermissionController@roleStore')->name('role.store');
+		Route::get('{role}', 'Admin\RolePermissionController@roleShow')->name('role.show');
+	});
 });
 
 
-Route::get('/email', function(){
-	 \Mail::to('jchong0618@gmail.com')->send(new \App\Mail\AccountActivation());
-	 echo 'sent!';
+Route::get('/env', function(){
+	 dd(getenv('APP_DEBUG'));
 });
+

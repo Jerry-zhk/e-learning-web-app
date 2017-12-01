@@ -12,37 +12,40 @@
 	</div>
 	<div class="column">
 		<!-- statistics -->
+		@if($auth->can('statistics'))
 		<div class="box">
 			<nav class="level">
 				<div class="level-item has-text-centered">
 					<div>
 						<p class="heading">New Users Today</p>
-						<p class="title">335</p>
+						<p class="title">{{ $newUserCount }}</p>
 					</div>
 				</div>
 				<div class="level-item has-text-centered">
 					<div>
 						<p class="heading">Purchases Today</p>
-						<p class="title">123</p>
+						<p class="title">{{ $purchaseCount }}</p>
 					</div>
 				</div>
 				<div class="level-item has-text-centered">
 					<div>
 						<p class="heading">Tutorials in Total</p>
-						<p class="title">1,585</p>
+						<p class="title">{{ $tutorialCount }}</p>
 					</div>
 				</div>
 				<div class="level-item has-text-centered">
 					<div>
-						<p class="heading">Likes</p>
-						<p class="title">789</p>
+						<p class="heading"># of Active Users</p>
+						<p class="title">{{ $activeUserCount }}</p>
 					</div>
 				</div>
 			</nav>
 		</div>
+		@endif
 		<!-- /statistics -->
 
 		<!-- user activities -->
+		@if($auth->can('user-activity-read'))
 		<div class="box">
 			<table class="table is-fullwidth">
 				<thead>
@@ -61,6 +64,7 @@
 				</tbody>
 			</table>
 		</div>
+		@endif
 		<!-- /user activities -->
 		
 		<!-- popular series -->
@@ -75,37 +79,20 @@
 					</tr>
 				</thead>
 				<tbody>
+					@foreach($popularSeries as $series)
 					<tr>
-						<td><a href="#">MySQL Basics</a></td>
-						<td class="has-text-centered">13</td>
-						<td class="has-text-centered">681</td>
+						<td><a href="{{ route('series.show', ['series' => $series->id]) }}">{{ $series->title }}</a></td>
+						<td class="has-text-centered">{{ $series->tutorials->count() }}</td>
+						<td class="has-text-centered">{{ $series->purchase_count }}</td>
 						<td>
 							<div class="tags">
-								<span class="tag">MySQL</span>
+								@foreach($series->skills as $skill)
+								<span class="tag">{{ $skill->display_name }}</span>
+								@endforeach
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<td><a href="#">PHP for beginner</a></td>
-						<td class="has-text-centered">18</td>
-						<td class="has-text-centered">466</td>
-						<td>
-							<div class="tags">
-								<span class="tag">PHP</span>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><a href="#">PHP PDO Tutorials</a></td>
-						<td class="has-text-centered">8</td>
-						<td class="has-text-centered">295</td>
-						<td>
-							<div class="tags">
-								<span class="tag">PHP</span>
-								<span class="tag">MySQL</span>
-							</div>
-						</td>
-					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>

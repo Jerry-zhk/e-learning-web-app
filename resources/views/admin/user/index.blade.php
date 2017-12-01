@@ -64,9 +64,11 @@
 							<a href="{{ route('user.show', ['user' => $user->id]) }}" class="button is-small is-link" title="More Details">
 								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
 							</a>
+							@if($auth->can('user-role-perm-update'))
 							<a href="{{ route('user.edit', ['user' => $user->id]) }}" class="button is-small" title="Settings">
 								<span class="icon"><i class="fa fa-wrench" aria-hidden="true"></i></span>
 							</a>
+							@endif
 						</td>
 					</tr>
 					@endforeach

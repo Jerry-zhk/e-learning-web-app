@@ -53,7 +53,7 @@ class User extends Authenticatable
     }
 
     public function accessibleToSeries(Series $series){
-        return $series->price == 0 || in_array($series->id, $this->purchased_series_list);
+        return $series->price == 0 || $this->can('series&tutorial-free-access') || in_array($series->id, $this->purchased_series_list);
     }
 
 

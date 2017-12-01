@@ -10,6 +10,13 @@ use App\Permission;
 
 class UserController extends Controller
 {
+
+    public function __construct(){
+        parent::__construct();
+        $this->middleware('role:superadmin|admin');
+        $this->middleware('permission:user-role-perm-update', ['only' => ['edit', 'roleUpdate', 'permissionUpdate']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +29,7 @@ class UserController extends Controller
         }else{
             $users = User::paginate(15);
         }
-        
+
         return view('admin.user.index', compact('users'));
     }
 
@@ -55,7 +62,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        
+
         return view('admin.user.details', compact('user'));
     }
 
@@ -96,15 +103,34 @@ class UserController extends Controller
     {
         //
     }
-    
+
     public function roleUpdate(Request $request, User $user)
     {
-        $user->syncRoles($request->input('roles'));
+        $validatedData = $request->validate([
+            'roles' => 'array',
+            'roles.*' => 'exists:roles,id'
+        ]);
+
+        if (empty($validatedData['roles'])){
+            $user->roles()->detach();
+        } else {
+            $user->syncRoles($validatedData['roles']);
+        }   
         return redirect()->route('user.edit', ['user'=>$user->id]);
     }
-    
+
     public function permissionUpdate(Request $request,User $user)
     {
+        $validatedData = $request->validate([
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id'
+        ]);
         
+        if (empty($validatedData['permissions'])){
+            $user->permissions()->detach();
+        } else {
+            $user->syncPermissions($validatedData['permissions']);
+        }   
+        return redirect()->route('user.edit', ['user'=>$user->id]);
     }
 }

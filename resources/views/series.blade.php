@@ -9,18 +9,19 @@
 </nav>
 <div class="box p-20">
 	<div class="content has-text-centered">
-		<h4 class="title is-4">{{$series->title}}</h4>
+		<p class="title is-4">
+			{{ $series->title }} 
+			@if($series->price == 0)
+			<span class="tag is-success">FREE</span>
+			@endif
+		</p>
 		<p class="m-b-20">
 			Skills: 
 			@foreach($series->skills as $skill)
-				<span class="tag">{{ $skill->display_name }}</span>
+			<span class="tag">{{ $skill->display_name }}</span>
 			@endforeach
 		</p>
 		<p class="m-b-20">{{$series->description}}</p>
-		
-		@if($series->price == 0)
-		<p class="has-text-weight-semibold">This Series is Free!</p>
-		@endif
 
 		@if(!$user->accessibleToSeries($series))
 		<p>

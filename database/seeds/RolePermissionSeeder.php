@@ -34,9 +34,9 @@ class RolePermissionSeeder extends Seeder
     		],
             //User roles
     		[
-    			'name' => 'user-role-update',
-    			'display_name' => 'User Role Update',
-    			'description' => 'Ability to update an user\'s role'
+    			'name' => 'user-role-perm-update',
+    			'display_name' => 'User Role/Perm Update',
+    			'description' => 'Ability to update an user\'s role or permission'
     		],
     		[
     			'name' => 'role-create',
@@ -55,11 +55,6 @@ class RolePermissionSeeder extends Seeder
     		],
             //User permission
     		[
-    			'name' => 'role-perm-update',
-    			'display_name' => 'Role Permission Update',
-    			'description' => 'Ability to update a role\'s permissions'
-    		],
-    		[
     			'name' => 'perm-create',
     			'display_name' => 'Permission Create',
     			'description' => 'Ability to create permissions'
@@ -75,6 +70,11 @@ class RolePermissionSeeder extends Seeder
     			'description' => 'Ability to delete permissions'
     		],
             //Series and tutorials
+            [
+                'name' => 'series&tutorial-free-access',
+                'display_name' => 'Series & Tutorial Free Access',
+                'description' => 'Ability to access series and tutorials for free'
+            ],
     		[
     			'name' => 'series&tutorial-create',
     			'display_name' => 'Series & Tutorial Create',
@@ -92,25 +92,15 @@ class RolePermissionSeeder extends Seeder
     		],
             //Transactions
     		[
-    			'name' => 'any-transaction-read',
+    			'name' => 'user-transaction-read',
     			'display_name' => 'Transaction Read',
     			'description' => 'Ability to read transactions of tutorial purchase of any user'
     		],
-    		[
-    			'name' => 'self-transaction-read',
-    			'display_name' => 'Any Transaction Read',
-    			'description' => 'Ability to read transactions of tutorial purchase of current user'
-    		],
             //User activities
     		[
-    			'name' => 'any-user-activity-read',
+    			'name' => 'user-activity-read',
     			'display_name' => 'User Activity Read',
     			'description' => 'Ability to read activities of any user'
-    		],
-    		[
-    			'name' => 'self-user-activity-read',
-    			'display_name' => 'Any User Activity Read',
-    			'description' => 'Ability to read activities of current user'
     		],
             //Deletion restore
     		[
@@ -118,12 +108,11 @@ class RolePermissionSeeder extends Seeder
     			'display_name' => 'Deletion Restore',
     			'description' => 'Ability to restore a deletion operation'
     		],
-            //User profile
             [
-    			'name' => 'profile-update',
-    			'display_name' => 'Profile Update',
-    			'description' => 'Ability to modify profile of current user'
-    		]
+                'name' => 'statistics',
+                'display_name' => 'Access Stats',
+                'description' => 'Ability to access to the site statistics'
+            ]
     	];
 
     	$permissions = array();
@@ -149,25 +138,14 @@ class RolePermissionSeeder extends Seeder
     	]);
 
     	$admin->attachPermissions([
-    		'series&tutorial-create',
-    		'series&tutorial-update',
+            'series&tutorial-free-access',
+            'series&tutorial-create',
+            'series&tutorial-update',
     		'series&tutorial-delete',
-    		'any-transaction-read',
-    		'self-transaction-read',
-    		'any-user-activity-read',
-    		'self-user-activity-read',
-    	]);
-
-        //Member
-    	$member = Role::create([
-    		'name' => 'member',
-    		'display_name' => 'Member',
-    		'description' => 'User who can access basic functionalities in the system.'
-    	]);
-
-		$member->attachPermissions([
-    		'self-transaction-read',
-    		'self-user-activity-read',
+    		'user-transaction-read',
+    		'user-activity-read',
+            'deletion-restore',
+            'statistics'
     	]);
         
         //Tutor
@@ -178,10 +156,18 @@ class RolePermissionSeeder extends Seeder
     	]);
 
 		$tutor->attachPermissions([
+            'series&tutorial-free-access',
             'series&tutorial-create',
             'series&tutorial-update',
-            'series&tutorial-delete'
     	]);
+
+        //Member
+        $member = Role::create([
+            'name' => 'member',
+            'display_name' => 'Member',
+            'description' => 'User who can access basic functionalities in the system.'
+        ]);
+
         
         
         

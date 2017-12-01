@@ -29,7 +29,7 @@
 						<a href="{{ route('series.tutorial.edit', ['series' => $series->id, 'tutorial' => $tutorial->id]) }}" class="button is-link m-r-5" title="Edit">
 							<span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span>&nbsp;Edit
 						</a>
-						@if($tutorial->deleted_at == null)
+						@if($tutorial->deleted_at == null && $auth->can('series&tutorial-delete'))
 						<form action="{{ route('series.tutorial.destroy', ['series' => $series, 'tutorial' => $tutorial->id]) }}" method="POST">
 							{{ csrf_field() }}
 							{{ method_field('DELETE') }}
@@ -37,7 +37,7 @@
 								<span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>&nbsp;Delete
 							</button>
 						</form>
-						@else
+						@elseif($auth->can('deletion-restore'))
 						<form action="{{ route('series.tutorial.restore', ['series' => $series, 'tutorial' => $tutorial->id]) }}" method="POST">
 							{{ csrf_field() }}
 							{{ method_field('PUT') }}

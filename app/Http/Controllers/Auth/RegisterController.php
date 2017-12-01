@@ -107,9 +107,13 @@ class RegisterController extends Controller
         ]);
 
         $user = User::where('email', '=', $validatedData['email'])->where('verify_token', '=', $validatedData['verify_token'])->first();
-        $user->verify_token = null;
-        $user->active = 1;
-        $user->save();
-        return redirect()->route('login')->with('message', 'You account is activated. Enjoy!');
+        if($user){
+            $user->verify_token = null;
+            $user->active = 1;
+            $user->save();
+            return redirect()->route('login')->with('message', 'You account is activated. Enjoy!');
+        }else{
+            return redirect()->route('login')->with('message', 'Activation error.');
+        }
     }
 }
