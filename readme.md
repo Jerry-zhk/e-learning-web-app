@@ -1,32 +1,35 @@
 ## Setup
-1. install php packages
+1. To install php packages, run
 ```
 composer install
 ```
 
-2. install javascript packages
+2. To install javascript packages, run
 ```
 npm install
 ```
 
-3. create ```.env``` file, simply duplicate content from ```.env.example``` and modify it
+3. Create ```.env``` file, duplicate content from ```.env.example``` and modify MySQL settings, then run 
+```
+php artisan config:clear
+```
 
 4. composer dump autoload map
 ```
 composer dump-autoload
 ```
 
-5. build up database
+5. Build up database tables
 ```
 php artisan migrate
 ```
 
-6. insert necessary data into database
+6. Insert necessary data into database
 ```
 php artisan db:seed
 ```
 
-7. generate laravel application key
+7. Generate Laravel application key
 ```
 php artisan key:generate
 ```
