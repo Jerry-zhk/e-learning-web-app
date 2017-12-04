@@ -12,7 +12,7 @@ class Tutorial extends Model
     protected $dates = ['deleted_at'];
 
     public function series(){
-    	return $this->belongsTo(Series::class, 'series_id');
+    	return $this->belongsTo(Series::class, 'series_id')->withTrashed();
     }
 
     public function scopeMatchKeyword($query, $keyword){

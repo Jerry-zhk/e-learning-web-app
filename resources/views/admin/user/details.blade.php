@@ -20,6 +20,8 @@
 						<h3 class="title is-3">{{ $user->username }}</h3>
 					</div>
 				</div>
+
+				@if($auth->can('user-role-perm-update'))
 				<div class="level-right">
 					<div class="level-item">
 						<a href="{{ route('user.edit', ['user' => $user->id]) }}" class="button is-link m-r-5" title="Settings">
@@ -27,6 +29,7 @@
 						</a>
 					</div>
 				</div>
+				@endif
 			</nav>
 			<div class="content">
 				<table class="table is-fullwidth">

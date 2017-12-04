@@ -9,9 +9,16 @@ use App\Models\Tutorial;
 use App\Models\seriesPurchase;
 use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class PublicController extends Controller
 {
+
+	public function __construct(){
+        parent::__construct();
+        $this->middleware('auth', ['only' => ['seriesPurchase', 'tutorial']]);
+    }
+
 	public function index(){
 		$today = Carbon::today();
 		// new tutorials of user purchased series
@@ -70,12 +77,12 @@ class PublicController extends Controller
 	}
 
 	public function series(Series $series){
-		$user = Auth::user();
-		return view('series', compact(['series', 'user']));
+		return view('series', compact(['series']));
 	}
 
 	public function tutorial(Tutorial $tutorial){
-		return view('tutorial', compact('tutorial'));
+		$user = auth()->user();
+		return view('tutorial', compact(['tutorial', 'user']));
 	}
 
 	public function seriesPurchase(Series $series){

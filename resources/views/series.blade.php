@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <nav class="breadcrumb" aria-label="breadcrumbs">
 	<ul>
@@ -22,19 +21,24 @@
 			@endforeach
 		</p>
 		<p class="m-b-20">{{$series->description}}</p>
+		
+		@if(isset($auth))
+			@if(!$auth->accessibleToSeries($series))
+			<p>
+				You have to purchase the series before start the tutorial...<br/>
+				<form action="{{ route('series.purchase', ['series4public' => $series->id]) }}" method="POST" class="m-t-5">
+					{{ csrf_field() }}
+					<button class="button is-success">Purchase ${{$series->price}}</button>
+				</form>
+			</p>
 
-		@if(!$user->accessibleToSeries($series))
-		<p>
-			You have to purchase the series before start the tutorial...<br/>
-			<form action="{{ route('series.purchase', ['series4public' => $series->id]) }}" method="POST" class="m-t-5">
-				{{ csrf_field() }}
-				<button class="button is-success">Purchase ${{$series->price}}</button>
-			</form>
-		</p>
+			@endif
+		@else
+			You have to <a href="{{ route('login') }}">Login</a> first.
 		@endif
 
 	</div>
-	@if($user->accessibleToSeries($series))
+	@if(isset($auth) && $auth->accessibleToSeries($series))
 	<hr>
 	<div class="content">
 		<h6 class="title is-6 has-text-centered">{{$series->tutorials->count()}} Tutorials</h6>

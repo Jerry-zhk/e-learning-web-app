@@ -29,7 +29,7 @@ class SeriesPurchasedListener
         $user = $event->user;
         $series = $event->series;
         $ev = new \App\Models\Event();
-        $ev->event_type = "Series Purchased";
+        $ev->event_type = "SERIES_PURCHASED";
         $ev->model_type = get_class($series);
         $ev->model_id = $series->id;
         $ev->user_id = $user->id;

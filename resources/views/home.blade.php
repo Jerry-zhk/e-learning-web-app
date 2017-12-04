@@ -166,7 +166,7 @@
     <div class="columns is-multiline">
         @foreach($freeSeries as $series)
         <div class="column is-one-third">
-            <a href="#">
+            <a href="{{ route('series.public', ['series' => $series->id]) }}">
                 <div class="card">
                     <div class="card-content">
                         <div class="media">

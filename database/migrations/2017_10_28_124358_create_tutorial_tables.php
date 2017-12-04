@@ -56,17 +56,6 @@ class CreateTutorialTables extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
         });
 
-        Schema::create('series_follow', function (Blueprint $table) {
-            $table->integer('series_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-
-            $table->foreign('series_id')->references('id')->on('series')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
-        });
-
     }
 
     /**

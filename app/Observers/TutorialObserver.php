@@ -40,6 +40,13 @@ class TutorialObserver
      */
     public function updated(Tutorial $tutorial)
     {
+        $isUpdated = false;
+        foreach($tutorial->getDirty() as $fieldName => $newValue)
+            if (!in_array($fieldName, ['created_at', 'updated_at', 'deleted_at'])) 
+                $isUpdated = true;
+            
+        if(!$isUpdated) return;
+        
         $event = new Event();
         $event->event_type = "TUTORIAL_UPDATE";
         $event->model_type = Tutorial::class;

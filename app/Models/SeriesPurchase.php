@@ -12,7 +12,7 @@ class SeriesPurchase extends Model
     public $timestamps = false;
 
     public function series(){
-        return $this->belongsTo(Series::class, 'series_id');
+        return $this->belongsTo(Series::class, 'series_id')->withTrashed();
     }
 
     public function user(){

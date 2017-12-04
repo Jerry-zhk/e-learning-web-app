@@ -27,7 +27,9 @@ class Event extends Model
     			return '<a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a> has logged in!';
     		case 'LOGOUT':
     			return '<a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a> has logged out!';
-
+            case 'SERIES_PURCHASED':
+                return 
+                '<a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a> has purchased series <a href="'. route('series.show', ['series' => $this->model->id]) .'"> ' . $this->model->title . '</a>';
     		case 'SERIES_CREATE':
     			return 
     			'Series <a href="'. route('series.show', ['series' => $this->model->id]) .'"> ' . $this->model->title . '</a> 
@@ -43,7 +45,7 @@ class Event extends Model
     		case 'SERIES_RESTORE':
     			return 
     			'Series <a href="'. route('series.show', ['series' => $this->model->id]) .'"> ' . $this->model->title . '</a> 
-    			is deleted by <a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a>';
+    			is restored by <a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a>';
 
     		case 'TUTORIAL_CREATE':
     			return 
@@ -60,11 +62,14 @@ class Event extends Model
     		case 'TUTORIAL_RESTORE':
     			return 
     			'Tutorial <a href="'. route('series.tutorial.show', ['series' => $this->model->series->id, 'tutorial' => $this->model->id]) .'"> ' . $this->model->title . '</a> 
-    			is deleted by <a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a>';
+    			is restored by <a href="'. route('user.show', ['user' => $this->user->id]) . '">@' . $this->user->username . '</a>';
+            
     		default:
     			return $this->description;
     	}
     }
+
+
 
     public function renderHTML4Profile(){
     	switch ($this->event_type) {
@@ -74,6 +79,9 @@ class Event extends Model
     			return 'Logged in.';
     		case 'LOGOUT':
     			return 'Logged out.';
+
+             case 'SERIES_PURCHASED':
+                return 'You have purchased the series - <a href="'. route('series.public', ['series4public' => $this->model->id]) .'"> ' . $this->model->title . '</a>';
 
     		case 'SERIES_CREATE':
     			return 'You have created the series - <a href="'. route('series.public', ['series4public' => $this->model->id]) .'"> ' . $this->model->title . '</a>';

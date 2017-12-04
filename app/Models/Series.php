@@ -17,7 +17,7 @@ class Series extends Model
     }
 
     public function tutorials(){
-    	return $this->hasMany(Tutorial::class, 'series_id');
+    	return $this->hasMany(Tutorial::class, 'series_id')->withTrashed();
     }
 
     public function purchases(){

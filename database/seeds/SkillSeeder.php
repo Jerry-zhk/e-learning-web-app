@@ -24,11 +24,6 @@ class SkillSeeder extends Seeder
         		'type' => 'Programming Language'
         	],
         	[
-        		'name' =>'css',
-        		'display_name' => 'CSS',
-        		'type' => 'Programming Language'
-        	],
-        	[
         		'name' =>'java',
         		'display_name' => 'Java',
         		'type' => 'Programming Language'

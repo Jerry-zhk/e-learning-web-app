@@ -124,9 +124,13 @@ class SeriesController extends Controller
     {
         if(!$series->trashed()){
             foreach($series->tutorials as $tutorial){
+                $tutorial->timestamps = false;
                 $tutorial->delete();
+                $tutorial->timestamps = true;
             }
+            $series->timestamps = false;
             $series->delete();
+            $series->timestamps = true;
         }
         
         return redirect()->route('series.index'); 
@@ -141,10 +145,14 @@ class SeriesController extends Controller
     public function restore(Series $series)
     {
         if ($series->trashed()) {
-            foreach($series->tutorials()->withTrashed()->get() as $tutorial){
+            foreach($series->tutorials as $tutorial){
+                $tutorial->timestamps = false;
                 $tutorial->restore();
+                $tutorial->timestamps = true;
             }
+            $series->timestamps = false;
             $series->restore();
+            $series->timestamps = true;
         }
         return redirect()->route('series.show', ['series' => $series->id]);
     }
