@@ -116,7 +116,7 @@
                 </div>
                 <div class="column is-5">
                     The Hong Kong Polytechnic University Hung Hom, Kowloon, Hong Kong<br>
-                    Copyright © 2017 Overcoded
+                    Copyright © 2017 {{ env('APP_NAME') }}
                 </div>
                 <div class="column is-4">
                     <img src="{{ asset('img/laravel.png') }}" style="height: 20px;">

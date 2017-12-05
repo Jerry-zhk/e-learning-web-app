@@ -50,7 +50,7 @@
 				<div class="field">
 					<div class="control">
 						<button class="button is-danger" title="Save Changes">
-							<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Save Changes
+							<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Save
 						</button>
 					</div>
 				</div>

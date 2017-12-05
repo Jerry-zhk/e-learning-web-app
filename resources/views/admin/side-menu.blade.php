@@ -24,7 +24,7 @@
 		Series &#38; Tutorials
 	</a>
 	@if($auth->can('statistics'))
-	<a href="#" class="panel-block">
+	<a href="{{ route('admin.statistics') }}" class="panel-block @if(Request::segment(2) === 'statistics') is-active @endif">
 		<span class="panel-icon">
 			<i class="fa fa-bar-chart" aria-hidden="true"></i>
 		</span>

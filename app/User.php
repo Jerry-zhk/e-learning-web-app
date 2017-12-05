@@ -72,4 +72,8 @@ class User extends Authenticatable
     {
         $this->notify(new sendPasswordResetNotification($token));
     }
+
+    public function scopeConsumer($query){
+        return $query->has('seriesPurchases');
+    }
 }

@@ -85,7 +85,7 @@
 				</div>
 				<div class="field">
 					<div class="control">
-						<button class="button is-success">Register</button>
+						<button class="button is-success">Save</button>
 					</div>
 				</div>
 			</form>

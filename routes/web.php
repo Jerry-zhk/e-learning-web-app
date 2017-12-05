@@ -36,7 +36,6 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin|tutor'])->gro
     Route::put('user/{user}/roleUpdate', 'Admin\UserController@roleUpdate')->name('admin.user.role.update');
     Route::put('user/{user}/permissionUpdate', 'Admin\UserController@permissionUpdate')->name('admin.user.permission.update');
 
-
 	Route::resource('series', 'Admin\SeriesController');
 	Route::put('series/{series}/restore', 'Admin\SeriesController@restore')->name('series.restore');
 
@@ -49,10 +48,8 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|admin|tutor'])->gro
 		Route::post('store', 'Admin\RolePermissionController@roleStore')->name('role.store');
 		Route::get('{role}', 'Admin\RolePermissionController@roleShow')->name('role.show');
 	});
+
+	Route::get('statistics', 'AdminController@statistics')->name('admin.statistics');
 });
 
-
-Route::get('/env', function(){
-	 dd(getenv('APP_DEBUG'));
-});
 

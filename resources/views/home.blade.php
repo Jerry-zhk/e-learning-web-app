@@ -33,7 +33,9 @@
                     <div class="card-content">
                         <div class="media">
                             <div class="media-content">
-                                <p class="title is-4">{{ $tutorial->title }}</p>
+                                <p class="title is-4">
+                                    {{ (strlen($tutorial->title) > 50) ? substr($tutorial->title, 0, 50).'...' : $tutorial->title }}
+                                </p>
                                 <p class="subtitle is-6">@ {{ $tutorial->series->title }}</p>
                             </div>
                         </div>
@@ -76,7 +78,7 @@
                         <div class="media">
                             <div class="media-content">
                                 <p class="title is-4">
-                                    {{ $series->title }} 
+                                    {{ (strlen($series->title) > 50) ? substr($series->title, 0, 50).'...' : $series->title }} 
                                     @if($series->price == 0)
                                     <span class="tag is-success">FREE</span>
                                     @endif
@@ -124,7 +126,7 @@
                         <div class="media">
                             <div class="media-content">
                                 <p class="title is-4">
-                                    {{ $series->title }} 
+                                    {{ (strlen($series->title) > 50) ? substr($series->title, 0, 50).'...' : $series->title }} 
                                     @if($series->price == 0)
                                     <span class="tag is-success">FREE</span>
                                     @endif
@@ -172,7 +174,7 @@
                         <div class="media">
                             <div class="media-content">
                                 <p class="title is-4">
-                                    {{ $series->title }} 
+                                    {{ (strlen($series->title) > 50) ? substr($series->title, 0, 50).'...' : $series->title }} 
                                     @if($series->price == 0)
                                     <span class="tag is-success">FREE</span>
                                     @endif

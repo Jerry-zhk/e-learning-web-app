@@ -65,7 +65,7 @@
 						<div class="field">
 							<div class="control">
 								<button class="button is-danger" title="Delete">
-									<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Create
+									<span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span>&nbsp;Save
 								</button>
 							</div>
 						</div>
