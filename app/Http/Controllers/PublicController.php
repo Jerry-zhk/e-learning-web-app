@@ -91,7 +91,6 @@ class PublicController extends Controller
 		$purchase->series_id = $series->id;
 		$purchase->user_id = $user->id;
 		$purchase->price = $series->price;
-		$purchase->credit_card_no = str_random(16);
 		$purchase->transaction_id = str_random(12);
 		$purchase->save();
 		event(new \App\Events\SeriesPurchased($user, $series));
