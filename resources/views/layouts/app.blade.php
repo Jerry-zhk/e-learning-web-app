@@ -37,7 +37,7 @@
                             <div class="navbar-dropdown">
                                 <a class="navbar-item" href="{{ route('profile.index') }}">My account</a>
                                 
-                                @if($auth->hasRole('admin|superadmin|tutor'))
+                                @if($auth->can('access-admin-page'))
                                     <a class="navbar-item" href="{{ route('admin.home') }}">Admin</a>
                                 @endif
                                 <a class="navbar-item" href="{{ route('logout') }}"

@@ -16,22 +16,11 @@ class RolePermissionSeeder extends Seeder
     {
 
     	$perms = [
-            //User
-    		[
-    			'name' => 'user-create',
-    			'display_name' => 'User Create',
-    			'description' => 'Ability to create user accounts'
-    		],
-    		[
-    			'name' => 'user-ban',
-    			'display_name' => 'User Ban',
-    			'description' => 'Ability to ban user accounts'
-    		],
-    		[
-    			'name' => 'user-delete',
-    			'display_name' => 'User Delete',
-    			'description' => 'Ability to delete user accounts'
-    		],
+            [
+                'name' => 'access-admin-page',
+                'display_name' => 'Access Admin Page',
+                'description' => 'Ability to access admin page'
+            ],
             //User roles
     		[
     			'name' => 'user-role-perm-update',
@@ -138,6 +127,7 @@ class RolePermissionSeeder extends Seeder
     	]);
 
     	$admin->attachPermissions([
+            'access-admin-page',
             'series&tutorial-free-access',
             'series&tutorial-create',
             'series&tutorial-update',
@@ -156,6 +146,7 @@ class RolePermissionSeeder extends Seeder
     	]);
 
 		$tutor->attachPermissions([
+            'access-admin-page',
             'series&tutorial-free-access',
             'series&tutorial-create',
             'series&tutorial-update',

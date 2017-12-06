@@ -18,7 +18,6 @@ class CreateSeriesPurchaseTable extends Migration
             $table->integer('series_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->float('price')->default(0);
-            $table->string('credit_card_no');
             $table->string('transaction_id');
             $table->timestamp('created_at');
 

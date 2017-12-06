@@ -32,7 +32,7 @@
 	</a>
 	@endif
 
-	@if($auth->hasRole('superadmin'))
+	@if($auth->can('user-role-perm-update'))
 	<a href="{{ route('role.index') }}" 
 		class="panel-block @if(Request::segment(2) === 'role' || Request::segment(2) === 'permission') is-active @endif">
 		<span class="panel-icon">

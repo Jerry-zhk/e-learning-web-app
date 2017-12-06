@@ -12,40 +12,40 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-    	$roleMember = App\Role::where('name', '=', 'member')->first();
-        factory(App\User::class, 10)->create()->each(function($u) use ($roleMember) {
-                $u->attachRole($roleMember);
+        factory(App\User::class, 1)->create()->each(function($u){
+                $u->active = 1;
+                $u->username = 'superadmin';
+                $u->name = 'Super Admin';
+                $u->save();
+                $u->syncRoles([1]);
          });
         
-        $superadmin = User::find(1);
-        $superadmin->active = 1;
-        $superadmin->username = 'superadmin';
-        $superadmin->name = 'Super Admin';
-        $superadmin->save();
-        $superadmin->syncRoles([1]);
-        
-        $admin = User::find(2);
-        $admin->active = 1;
-        $admin->username = 'admin';
-        $admin->name = 'Admin';
-        $admin->save();
-        $admin->syncRoles([2]);
-        
+        factory(App\User::class, 1)->create()->each(function($u){
+                $u->active = 1;
+                $u->username = 'admin';
+                $u->name = 'Admin';
+                $u->save();
+                $u->syncRoles([2]);
+         });
 
-        $tutor = User::find(3);
-        $tutor->active = 1;
-        $tutor->username = 'tutor';
-        $tutor->name = 'Tutor';
-        $tutor->save();
-        $tutor->syncRoles([3]);
+        factory(App\User::class, 1)->create()->each(function($u){
+                $u->active = 1;
+                $u->username = 'tutor';
+                $u->name = 'Tutor';
+                $u->save();
+                $u->syncRoles([3]);
+         });
 
-        $member = User::find(4);
-        $member->active = 1;
-        $member->username = 'member';
-        $member->name = 'Member';
-        $member->save();
-
-        $member->syncRoles([4]);
+        factory(App\User::class, 1)->create()->each(function($u){
+                $u->active = 1;
+                $u->username = 'member';
+                $u->name = 'Member';
+                $u->save();
+                $u->syncRoles([4]);
+         });
+        factory(App\User::class, 6)->create()->each(function($u){
+                $u->syncRoles([4]);
+         });
         
         
     }
