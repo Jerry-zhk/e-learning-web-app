@@ -22,7 +22,7 @@
 				</div>
 				<div class="level-item has-text-centered">
 					<div>
-						<p class="heading"># of Users</p>
+						<p class="heading"># of Active Users</p>
 						<p class="title">{{ $activeUserCount }}</p>
 					</div>
 				</div>

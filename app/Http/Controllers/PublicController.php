@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Skill;
 use App\Models\Series;
 use App\Models\Tutorial;
-use App\Models\seriesPurchase;
+use App\Models\SeriesPurchase;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
