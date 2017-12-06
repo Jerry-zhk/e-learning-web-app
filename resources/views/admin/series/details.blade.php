@@ -138,7 +138,7 @@
 							<a href="{{ route('series.tutorial.show', ['series' => $series->id, 'tutorial' => $tutorial->id]) }}" class="button is-small is-link" title="More Details">
 								<span class="icon"><i class="fa fa-info" aria-hidden="true"></i></span>
 							</a>
-							<a href="#" class="button is-small" title="Public Link">
+							<a href="{{ route('tutorial.public', ['tutorialSlug' => $tutorial->slug]) }}" class="button is-small" title="Public Link">
 								<span class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
 							</a>
 						</td>
